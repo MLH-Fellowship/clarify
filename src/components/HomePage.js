@@ -3,8 +3,6 @@ import "../styles/HomePage.css";
 import DocumentTitle from "react-document-title";
 import { Link } from 'react-router-dom';
 
-
-
 export default class HomePage extends React.Component {
 	handleClick = () => {
 		sessionStorage.clear();
