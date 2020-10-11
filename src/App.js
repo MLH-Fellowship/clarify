@@ -1,26 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import {
+  Route,
+  BrowserRouter as Router,
+  Switch,
+  Redirect,
+} from "react-router-dom";
+import HomePage from './components/HomePage';
+import DocumentTitle from "react-document-title";
+import './styles/App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default function App() {
+	return (
+		<DocumentTitle title="DoubleCheck">
+			<Router basename={process.env.PUBLIC_URL}>
+				<hr></hr>
+				<Switch>
+					<Route path="/" exact={true} component={HomePage}></Route>
+				</Switch>
+			</Router>
+		</DocumentTitle>
+	);
 }
 
-export default App;
