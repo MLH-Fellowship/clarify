@@ -14,9 +14,11 @@ import SavedList from "./components/SavedList";
 ReactDOM.render(
   <React.StrictMode>
     <App />
-    <NotificationContainer />
-    <SavedList />
-    <Register />
+      <div className="container my-2">
+      <NotificationContainer />
+      <SavedList />
+      <Register />
+      </div>
   </React.StrictMode>
   ,
   document.getElementById('root')
