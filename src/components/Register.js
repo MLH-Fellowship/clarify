@@ -2,6 +2,10 @@ import React from "react";
 import { NotificationManager } from "react-notifications";
 import { db } from "../services/firebase";
 
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
+
 class Register extends React.Component {
   constructor(props) {
     super(props);
@@ -93,6 +97,8 @@ class Register extends React.Component {
     const { formValues, formErrors, isSubmitting } = this.state;
     return (
       <>
+
+
         <div className="row mb-5">
           <div className="col-lg-12 text-center">
             <h1 className="mt-5">Register New Question</h1>
@@ -106,9 +112,8 @@ class Register extends React.Component {
                 <input
                   type="text"
                   name="user"
-                  className={`form-control ${
-                    formErrors.user ? "is-invalid" : ""
-                  }`}
+                  className={`form-control ${formErrors.user ? "is-invalid" : ""
+                    }`}
                   placeholder="Enter your name"
                   onChange={this.handleChange}
                   value={formValues.user}
@@ -120,9 +125,8 @@ class Register extends React.Component {
                 <input
                   type="text"
                   name="question"
-                  className={`form-control ${
-                    formErrors.question ? "is-invalid" : ""
-                  }`}
+                  className={`form-control ${formErrors.question ? "is-invalid" : ""
+                    }`}
                   placeholder="Enter your question"
                   onChange={this.handleChange}
                   value={formValues.question}

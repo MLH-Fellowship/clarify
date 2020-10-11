@@ -1,6 +1,7 @@
 import React from "react";
 import { db } from "../services/firebase";
-import { Button } from '@material-ui/core';
+import Button from "react-bootstrap/Button";
+
 class SavedList extends React.Component {
   constructor(props) {
     super(props);
@@ -12,7 +13,7 @@ class SavedList extends React.Component {
   componentDidMount() {
     this.getLatestSnapshot();
   }
-  
+
   getLatestSnapshot() {
     db.collection("questions")
       .get()
@@ -22,13 +23,13 @@ class SavedList extends React.Component {
         this.setState({ questions: data });
       });
   }
- 
+
   handleClick(question) {
     db.collection("questions").doc(question).delete().then(() => {
       console.log("Document successfully deleted!");
       this.getLatestSnapshot();
-    }).catch(function(error) {
-        console.error("Error removing document: ", error);
+    }).catch(function (error) {
+      console.error("Error removing document: ", error);
     });
   };
 
