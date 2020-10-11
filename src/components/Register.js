@@ -7,35 +7,36 @@ class Register extends React.Component {
     super(props);
     this.state = {
       formValues: {
-        name: "",
-        role: ""
+        user: "",
+        question: ""
       },
       formErrors: {
-        name: "",
-        role: ""
+        user: "",
+        question: ""
       },
       formValidity: {
-        name: false,
-        role: false
+        user: false,
+        question: false
       },
       isSubmitting: false
     };
   }
 
-  addUser = () => {
+  addQuestion = () => {
     const data = {
       ...this.state.formValues,
-      uid: new Date().getTime()
+      uid: this.state.formValues.question
     };
-    db.collection("users")
+    console.log(data);
+    db.collection("questions")
       .doc(data.uid.toString())
       .set(data)
       .then(() => {
-        NotificationManager.success("A new user has been added", "Success");
+        NotificationManager.success("A new question has been asked", "Success");
         window.location = "/";
       })
       .catch(error => {
-        NotificationManager.error(error.message, "Create user failed");
+        NotificationManager.error(error.message, "Addition of question failed");
         this.setState({ isSubmitting: false });
       });
   };
@@ -45,7 +46,7 @@ class Register extends React.Component {
     this.setState({ isSubmitting: true });
     const { formValues, formValidity } = this.state;
     if (Object.values(formValidity).every(Boolean)) {
-      this.addUser();
+      this.addQuestion();
     } else {
       for (let key in formValues) {
         let target = {
@@ -94,39 +95,39 @@ class Register extends React.Component {
       <>
         <div className="row mb-5">
           <div className="col-lg-12 text-center">
-            <h1 className="mt-5">Register New Person</h1>
+            <h1 className="mt-5">Register New Question</h1>
           </div>
         </div>
         <div className="row">
           <div className="col-lg-12">
             <form onSubmit={this.handleSubmit}>
               <div className="form-group">
-                <label>Name</label>
+                <label>Your name</label>
                 <input
                   type="text"
-                  name="name"
+                  name="user"
                   className={`form-control ${
-                    formErrors.name ? "is-invalid" : ""
+                    formErrors.user ? "is-invalid" : ""
                   }`}
-                  placeholder="Enter name"
+                  placeholder="Enter your name"
                   onChange={this.handleChange}
-                  value={formValues.name}
+                  value={formValues.user}
                 />
                 <div className="invalid-feedback">{formErrors.name}</div>
               </div>
               <div className="form-group">
-                <label>Role</label>
+                <label>Question</label>
                 <input
                   type="text"
-                  name="role"
+                  name="question"
                   className={`form-control ${
-                    formErrors.role ? "is-invalid" : ""
+                    formErrors.question ? "is-invalid" : ""
                   }`}
-                  placeholder="Enter role"
+                  placeholder="Enter your question"
                   onChange={this.handleChange}
-                  value={formValues.role}
+                  value={formValues.question}
                 />
-                <div className="invalid-feedback">{formErrors.role}</div>
+                <div className="invalid-feedback">{formErrors.question}</div>
               </div>
               <button
                 type="submit"
