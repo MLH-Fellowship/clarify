@@ -4,10 +4,21 @@ import './styles/index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+import "bootstrap/dist/css/bootstrap.css";
+import "react-notifications/lib/notifications.css";
+
+import { NotificationContainer } from "react-notifications";
+import Register from "./components/Register";
+import SavedList from "./components/SavedList";
+
 ReactDOM.render(
   <React.StrictMode>
     <App />
-  </React.StrictMode>,
+    <NotificationContainer />
+    <SavedList />
+    <Register />
+  </React.StrictMode>
+  ,
   document.getElementById('root')
 );
 
