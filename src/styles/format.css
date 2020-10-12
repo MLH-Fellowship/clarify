@@ -2,7 +2,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     /* border: 5px solid black; */
-    margin: 50px;
+    margin: 20px;
 }
 
 .questionGrid {
@@ -21,3 +21,16 @@
     text-align: center;
 }
 
+.questions {
+    border: 2px dotted black;
+    padding: 20px;
+}
+
+.poll {
+    border: 2px dotted black;
+    padding: 20px;
+}
+
+#myChart {
+   width: 100% !important;
+}
