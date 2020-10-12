@@ -100,13 +100,15 @@ class Register extends React.Component {
 
 
         <div className="row mb-5">
-          <div className="col-lg-12 text-center">
+          {/*<div className="col-lg-12 text-center">
             <h1 className="mt-5">Register New Question</h1>
-          </div>
+    </div> */}
         </div>
         <div className="row">
           <div className="col-lg-12">
             <form onSubmit={this.handleSubmit}>
+              <div className="questionGrid">
+              <div>
               <div className="form-group">
                 <label>Your name</label>
                 <input
@@ -133,15 +135,17 @@ class Register extends React.Component {
                 />
                 <div className="invalid-feedback">{formErrors.question}</div>
               </div>
+              </div>
               <button
                 type="submit"
-                className="btn btn-primary btn-block"
+                className="btn btn-primary submitButton"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? "Please wait..." : "Submit"}
               </button>
+              </div>
             </form>
-          </div>
+        </div>
         </div>
       </>
     );

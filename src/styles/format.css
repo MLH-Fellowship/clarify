@@ -1,0 +1,23 @@
+#flexbox {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* border: 5px solid black; */
+    margin: 50px;
+}
+
+.questionGrid {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    align-items: center;
+}
+
+.submitButton {
+    display: block;
+    margin-left: 10%;
+    margin-right: 10%;
+    width: 80%;
+    height: 80%;
+    font-size: 130%;
+    text-align: center;
+}
+
