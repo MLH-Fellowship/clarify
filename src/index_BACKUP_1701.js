@@ -2,13 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './styles/index.css';
 import App from './App';
+import HomePage from './components/HomePage';
 import * as serviceWorker from './serviceWorker';
 
 import "bootstrap/dist/css/bootstrap.css";
 import "react-notifications/lib/notifications.css";
 
+<<<<<<< HEAD
 import { NotificationContainer } from "react-notifications";
-import Questions from "./components/Questions";
+import Register from "./components/Register";
+import SavedList from "./components/SavedList";
 import Poll from "./components/Poll";
 import './styles/format.css';
 
@@ -17,7 +20,8 @@ ReactDOM.render(
     <NotificationContainer />
     <div id='flexbox'>
       <div class='questions'>
-        <Questions />
+        <SavedList />
+        <Register />
       </div>
       <div class='poll'>
         <Poll />
@@ -25,6 +29,11 @@ ReactDOM.render(
     </div>
 
 
+=======
+ReactDOM.render(
+  <React.StrictMode>
+    <HomePage />
+>>>>>>> prionti
   </React.StrictMode>
   ,
   document.getElementById('root')

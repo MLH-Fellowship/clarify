@@ -8,23 +8,16 @@ import "bootstrap/dist/css/bootstrap.css";
 import "react-notifications/lib/notifications.css";
 
 import { NotificationContainer } from "react-notifications";
-import Questions from "./components/Questions";
+import Register from "./components/Register";
+import SavedList from "./components/SavedList";
 import Poll from "./components/Poll";
-import './styles/format.css';
 
 ReactDOM.render(
   <React.StrictMode>
     <NotificationContainer />
-    <div id='flexbox'>
-      <div class='questions'>
-        <Questions />
-      </div>
-      <div class='poll'>
-        <Poll />
-      </div>
-    </div>
-
-
+    <SavedList />
+    <Register />
+    <Poll />
   </React.StrictMode>
   ,
   document.getElementById('root')

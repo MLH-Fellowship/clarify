@@ -1,0 +1,13 @@
+
+
+.questionCard {
+    margin-top: 5px;
+    font-family: "Poppins", sans-serif;
+    display: inline-block;
+	font-style: italic;
+    background-color: paleturquoise;
+	border: 1px solid black;
+	border-radius: 5px;
+    width: 95%;
+    min-width: 100px;
+}
