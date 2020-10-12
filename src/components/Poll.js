@@ -3,6 +3,7 @@ import { db } from "../services/firebase";
 
 import SentimentButton from './SentimentButton';
 import BarChart from './BarChart';
+import BarChart2 from './BarChart2';
 
 function Poll(props) {
   const [data, setData] = useState([]);
@@ -49,8 +50,9 @@ function Poll(props) {
 
   return (
     <>
+      {/* <BarChart data={data} /> */}
+      <BarChart2 data={data} />
       {buttons}
-      <BarChart data={data} />
     </>
   )
 }
