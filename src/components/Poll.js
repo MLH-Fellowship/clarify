@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { db } from "../services/firebase";
 
 import SentimentButton from './SentimentButton';
-import BarChart from './BarChart';
 import BarChart2 from './BarChart2';
 
 function Poll(props) {
@@ -41,17 +40,14 @@ function Poll(props) {
 
   // Buttons
   const pollOptions = [
-    { name: '😳' },
-    { name: '😕' },
-    { name: '🙂' },
-    { name: '😁' }
+    '😳', '😕', '🙂', '😁'
   ]
-  const buttons = pollOptions.map((option) => <SentimentButton text={option.name} onClick={onClick} />)
+  const buttons = pollOptions.map((option) => <SentimentButton text={option} onClick={onClick} />)
 
   return (
     <>
       {/* <BarChart data={data} /> */}
-      <BarChart2 data={data} />
+      <BarChart2 data={data} labels={pollOptions} />
       {buttons}
     </>
   )

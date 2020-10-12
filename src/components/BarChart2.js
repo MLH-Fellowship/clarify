@@ -1,34 +1,50 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Chart from 'chart.js';
 
-function BarChart2(props) {
-  console.log('barchart2', props.data);
+let myChart;
 
-  var labels = props.data.map((o) => o.name);
-  var votes = props.data.map((o) => o.count);
+class BarChart2 extends React.Component {
+  // reference to canvas
+  chartRef = React.createRef();
 
-  // let labels = ["😁", "😕", "😳", "🙂"];
-  // let votes = [5, 4, 11, 5];
-  console.log('barchart2', labels);
-  console.log('barchart2', votes);
+  componentDidMount() {
+    this.buildChart();
+  }
 
-  useEffect(() => {
-    const ctx = document.getElementById("myChart");
-    Chart.scaleService.updateScaleDefaults('linear', {
-      ticks: {
-        min: 0
-      }
+  componentDidUpdate() {
+    this.buildChart();
+  }
+
+  buildChart = () => {
+
+    const myChartRef = this.chartRef.current.getContext("2d");
+
+    if (myChart) {
+      myChart.destroy();
+    }
+
+    var labels = this.props.labels;
+
+    // [{ label: count }...]
+    let data = this.props.data.map(o => { return { [o.name]: o.count } });
+
+    // sort data from firebase based on label order passed in via props.labels
+    data.sort(function (a, b) {
+      return labels.indexOf(Object.keys(a)[0]) - labels.indexOf(Object.keys(b)[0]);
     });
 
-    new Chart(ctx, {
+    // map into [#, #, #...] to use in chart datasets
+    data = data.map(o => Object.values(o)[0]);
+
+    myChart = new Chart(myChartRef, {
       type: "bar",
       data: {
         labels: labels,
         datasets: [
           {
             label: "# votes",
-            data: votes,
-            backgroundColor: ['#007bff', '#007bff', '#007bff', '#007bff', '#007bff'],
+            data: data,
+            backgroundColor: ['rgba(0, 123, 255, 0.5)', 'rgba(0, 123, 255, 0.5)', 'rgba(0, 123, 255, 0.5)', 'rgba(0, 123, 255, 0.5)', 'rgba(0, 123, 255, 0.5)'],
             borderWidth: 1
           }
         ]
@@ -38,7 +54,16 @@ function BarChart2(props) {
           yAxes: [{
             ticks: {
               beginAtZero: true,
-              suggestedMax: 50
+              suggestedMax: 50,
+              display: false
+            },
+            gridLines: {
+              display: false
+            }
+          }],
+          xAxes: [{
+            gridLines: {
+              display: false
             }
           }]
         },
@@ -47,10 +72,11 @@ function BarChart2(props) {
         }
       }
     });
-  }, [props]);
-  return (
-    <canvas id="myChart" width="400" height="400" />
-  );
+  }
+
+  render() {
+    return <canvas id="myChart" ref={this.chartRef} width="400" height="400" />
+  };
 }
 
 export default BarChart2;
