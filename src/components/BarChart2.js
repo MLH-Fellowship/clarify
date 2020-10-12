@@ -53,6 +53,9 @@ class BarChart2 extends React.Component {
         ]
       },
       options: {
+        legend: {
+          display: false
+        },
         scales: {
           yAxes: [{
             ticks: {

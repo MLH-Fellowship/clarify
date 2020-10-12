@@ -3,25 +3,26 @@ import { db } from "../services/firebase";
 
 import SentimentButton from './SentimentButton';
 import BarChart2 from './BarChart2';
+import { Radio } from 'antd';
 
 function Poll(props) {
   const [data, setData] = useState([]);
 
   // TODO: e.target.name only works when clicking on upper left hand corner of MUI button
-  const onClick = async (e) => {
-    // Get current value
-    let currData = data.filter(function (option) {
-      return option.name === e.target.name
-    })[0].count;
+  // const onClick = async (e) => {
+  //   // Get current value
+  //   let currData = data.filter(function (option) {
+  //     return option.name === e.target.name
+  //   })[0].count;
 
-    // update db with new value
-    db.collection('poll').doc(e.target.name).set({
-      count: currData + 1
-    })
-      .catch(function (error) {
-        console.error('Error writing document: ', error);
-      });
-  }
+  //   // update db with new value
+  //   db.collection('poll').doc(e.target.name).set({
+  //     count: currData + 1
+  //   })
+  //     .catch(function (error) {
+  //       console.error('Error writing document: ', error);
+  //     });
+  // }
 
   // TODO: customize button order
   // Update data when db collection is modified 
@@ -42,13 +43,33 @@ function Poll(props) {
   const pollOptions = [
     '😳', '😕', '🙂', '😁'
   ]
-  const buttons = pollOptions.map((option) => <SentimentButton text={option} onClick={onClick} />)
+  const buttons = pollOptions.map((option) => <SentimentButton text={option} />)
+
+  function onChange(e) {
+    console.log(e.target);
+    e.target.style.color = 'black'
+
+    // Get current value
+    let currData = data.filter(function (option) {
+      return option.name === e.target.value
+    })[0].count;
+
+    // update db with new value
+    db.collection('poll').doc(e.target.value).set({
+      count: currData + 1
+    })
+      .catch(function (error) {
+        console.error('Error writing document: ', error);
+      });
+  }
+
 
   return (
     <>
-      {/* <BarChart data={data} /> */}
       <BarChart2 data={data} labels={pollOptions} />
-      {buttons}
+      <Radio.Group onChange={onChange} defaultValue="🙂" size="large" >
+        {buttons}
+      </Radio.Group>
     </>
   )
 }

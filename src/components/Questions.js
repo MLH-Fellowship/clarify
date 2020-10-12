@@ -7,11 +7,11 @@ import "../styles/Questions.css";
 
 
 class Questions extends React.Component {
-  
+
   constructor(props, state) {
     super();
     this.state = {
-      asking : false,
+      asking: false,
       questions: [],
       formValues: {
         user: "",
@@ -59,7 +59,7 @@ class Questions extends React.Component {
     const { formValues, formValidity } = this.state;
     if (Object.values(formValidity).every(Boolean)) {
       this.addQuestion();
-      this.setState({asking: false});
+      this.setState({ asking: false });
       console.log("not asking");
     } else {
       for (let key in formValues) {
@@ -105,8 +105,7 @@ class Questions extends React.Component {
 
   getLatestSnapshot() {
     db.collection("questions")
-      .get()
-      .then(querySnapshot => {
+      .onSnapshot(querySnapshot => {
         const data = querySnapshot.docs.map(doc => doc.data());
         console.log(data);
         this.setState({ questions: data });
@@ -123,90 +122,88 @@ class Questions extends React.Component {
   };
 
   handleAsk() {
-    this.setState({asking: true});
+    this.setState({ asking: true });
   }
 
-  handleCancel(){
-    this.setState({asking: false});
+  handleCancel() {
+    this.setState({ asking: false });
   }
-  
+
   render() {
     const { asking, questions, formValues, formErrors, isSubmitting } = this.state;
     console.log(questions);
     return (
       <>
         <div className="row">
-        {questions.map(question => (
-          <div key={question.uid} className="questionCard">
-                  <h5>{question.user}</h5>
-                  <h6>{question.question}</h6>
-                  <Button variant="outlined" color="primary" onClick={this.handleClick.bind(this, question.question)}>
-                    Resolve
+          {questions.map(question => (
+            <div key={question.uid} className="questionCard">
+              <h5>{question.user}</h5>
+              <h6>{question.question}</h6>
+              <Button variant="outlined" color="primary" onClick={this.handleClick.bind(this, question.question)}>
+                Resolve
                   </Button>
-          </div>
-        ))}
-      </div>
+            </div>
+          ))}
+        </div>
         <div className="row mb-5">
           <div className="col-lg-12 text-center">
-          <button
-                type="submit"
-                className="btn btn-primary btn-block"
-                style={{marginTop: '10px', backgroundColor:"paleturquoise", color:"black", borderColor:"paleturquoise"}}
-                disabled={isSubmitting}
-                onClick={this.handleAsk.bind(this)}
-              >
-                Ask something!
+            <button
+              type="submit"
+              className="btn btn-primary btn-block"
+              style={{ marginTop: '10px' }}
+              disabled={isSubmitting}
+              onClick={this.handleAsk.bind(this)}
+            >
+              Ask something!
               </button>
-              {asking ==true? <span><div className="row">
-                <div className="col-lg-12">
-                  <form onSubmit={this.handleSubmit}>
-                    <div className="form-group">
-                      <label>Your name</label>
-                      <input
-                        type="text"
-                        name="user"
-                        className={`form-control ${formErrors.user ? "is-invalid" : ""
-                          }`}
-                        placeholder="Enter your name"
-                        onChange={this.handleChange}
-                        value={formValues.user}
-                      />
-                      <div className="invalid-feedback">{formErrors.name}</div>
-                    </div>
-                    <div className="form-group">
-                      <label>Question</label>
-                      <input
-                        type="text"
-                        name="question"
-                        className={`form-control ${formErrors.question ? "is-invalid" : ""
-                          }`}
-                        placeholder="Enter your question"
-                        onChange={this.handleChange}
-                        value={formValues.question}
-                      />
-                      <div className="invalid-feedback">{formErrors.question}</div>
-                    </div>
-                    <button
-                      type="submit"
-                      className="btn btn-primary btn-block"
-                      style={{backgroundColor:"paleturquoise", color:"black", borderColor:"paleturquoise"}}
-                      disabled={isSubmitting}
-                      onClick={this.handleSubmit.bind(this)}
-                    >
-                      {isSubmitting ? "Please wait..." : "Submit"}
-                    </button>
-                    <button
-                      type="cancel"
-                      className="btn btn-primary btn-block"
-                      style={{backgroundColor:"transparent", color:"black", borderColor:"paleturquoise"}}
-                      disabled={isSubmitting}
-                      onClick={this.handleCancel.bind(this)}
-                    >
+            {asking == true ? <span><div className="row">
+              <div className="col-lg-12">
+                <form onSubmit={this.handleSubmit}>
+                  <div className="form-group">
+                    <label>Your name</label>
+                    <input
+                      type="text"
+                      name="user"
+                      className={`form-control ${formErrors.user ? "is-invalid" : ""
+                        }`}
+                      placeholder="Enter your name"
+                      onChange={this.handleChange}
+                      value={formValues.user}
+                    />
+                    <div className="invalid-feedback">{formErrors.name}</div>
+                  </div>
+                  <div className="form-group">
+                    <label>Question</label>
+                    <input
+                      type="text"
+                      name="question"
+                      className={`form-control ${formErrors.question ? "is-invalid" : ""
+                        }`}
+                      placeholder="Enter your question"
+                      onChange={this.handleChange}
+                      value={formValues.question}
+                    />
+                    <div className="invalid-feedback">{formErrors.question}</div>
+                  </div>
+                  <button
+                    type="submit"
+                    className="btn btn-primary btn-block"
+                    disabled={isSubmitting}
+                    onClick={this.handleSubmit.bind(this)}
+                  >
+                    {isSubmitting ? "Please wait..." : "Submit"}
+                  </button>
+                  <button
+                    type="cancel"
+                    className="btn btn-primary btn-block"
+                    disabled={isSubmitting}
+                    onClick={this.handleCancel.bind(this)}
+                  >
                     Cancel
                     </button>
-                  </form>
-                </div>
-              </div></span>:null}
+                </form>
+              </div>
+            </div></span> : null}
           </div>
         </div>
       </>

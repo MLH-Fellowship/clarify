@@ -1,7 +1,6 @@
 import React from 'react';
 
 function BarGroup(props) {
-  let barColour = "paleturquoise"
   let heightScale = d => d * 25
 
   let height = heightScale(props.d.count)

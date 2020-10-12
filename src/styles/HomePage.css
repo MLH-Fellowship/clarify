@@ -33,7 +33,7 @@
 .confirmationPage mark {
   padding-left: 0.5vh;
   padding-right: 2vh;
-  background-color: #c1e6ec;
+  background-color: #1890ff;
 }
 
 .homePage h2,
@@ -50,19 +50,4 @@
   margin-bottom: 0;
   font-size: 3vh;
   font-weight: 200;
-}
-
-.button {
-  background-color: #c1e6ec;
-  min-width: 100px;
-  width: 200px;
-  color: black;
-  font-size: 20px;
-  vertical-align: middle;
-  padding: 10px 60px;
-  border-radius: 5px;
-  margin-top: 50px;
-  margin-left: auto;
-  margin-right: auto;
-  cursor: pointer;
 }
