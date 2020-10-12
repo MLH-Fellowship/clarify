@@ -10,8 +10,15 @@ import DocumentTitle from "react-document-title";
 import './styles/App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-export default function App() {
-	return (
+class App extends React.Component {
+  constuctor(props)  {
+    this.state = {
+      questions: []
+    };
+  }
+    
+  render(){
+    return (
 		<DocumentTitle title="DoubleCheck">
 			<Router basename={process.env.PUBLIC_URL}>
 				<hr></hr>
@@ -21,6 +28,7 @@ export default function App() {
 			</Router>
 		</DocumentTitle>
 
-	);
+  );
+  }
 }
 
