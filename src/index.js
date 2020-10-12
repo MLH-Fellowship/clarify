@@ -11,13 +11,22 @@ import { NotificationContainer } from "react-notifications";
 import Register from "./components/Register";
 import SavedList from "./components/SavedList";
 import Poll from "./components/Poll";
+import './styles/format.css';
 
 ReactDOM.render(
   <React.StrictMode>
     <NotificationContainer />
-    <SavedList />
-    <Register />
-    <Poll />
+    <div id = 'flexbox'>
+      <div class = 'questions'>
+        <SavedList />
+        <Register />
+      </div>
+      <div class = 'poll'>
+      {/* <Poll /> */}
+      </div>
+    </div>
+    
+    
   </React.StrictMode>
   ,
   document.getElementById('root')
