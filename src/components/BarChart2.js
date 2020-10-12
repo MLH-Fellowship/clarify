@@ -1,5 +1,6 @@
 import React from 'react';
 import Chart from 'chart.js';
+import '../styles/format.css';
 
 let myChart;
 
@@ -38,6 +39,8 @@ class BarChart2 extends React.Component {
 
     myChart = new Chart(myChartRef, {
       type: "bar",
+      response: true,
+      maintainAspectRatio: false,
       data: {
         labels: labels,
         datasets: [
@@ -75,7 +78,7 @@ class BarChart2 extends React.Component {
   }
 
   render() {
-    return <canvas id="myChart" ref={this.chartRef} width="400" height="400" />
+    return <canvas id="myChart" ref={this.chartRef}/>
   };
 }
 
