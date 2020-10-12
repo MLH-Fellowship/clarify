@@ -13,19 +13,19 @@ export default class HomePage extends React.Component {
 
 	render() {
 		return (
-		<DocumentTitle title="Home Page">
-			<div className="homePage">
-				<h1>
-					<mark> make sure you don't leave class confused </mark>
-				</h1>
-                <div>
-                    <div>
-                    </div>
-      </div>
-				<button className="button" onClick={this.handleClick}>Log in</button>
-			</div>
-            
-		</DocumentTitle>
-	);
+			<DocumentTitle title="Home Page">
+				<div className="homePage">
+					<h1>
+						don't leave class confused
+					</h1>
+					<div>
+						<div>
+						</div>
+					</div>
+					<button className="button" onClick={this.handleClick}>Log in</button>
+				</div>
+
+			</DocumentTitle>
+		);
 	}
 }

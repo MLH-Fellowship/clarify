@@ -10,13 +10,14 @@ import "react-notifications/lib/notifications.css";
 import { NotificationContainer } from "react-notifications";
 import Register from "./components/Register";
 import SavedList from "./components/SavedList";
+import Poll from "./components/Poll";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
     <NotificationContainer />
     <SavedList />
     <Register />
+    <Poll />
   </React.StrictMode>
   ,
   document.getElementById('root')
