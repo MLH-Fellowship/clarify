@@ -16,17 +16,17 @@ import './styles/format.css';
 ReactDOM.render(
   <React.StrictMode>
     <NotificationContainer />
-    <div id = 'flexbox'>
-      <div class = 'questions'>
+    <div id='flexbox'>
+      <div class='questions'>
         <SavedList />
         <Register />
       </div>
-      <div class = 'poll'>
-      {/* <Poll /> */}
+      <div class='poll'>
+        <Poll />
       </div>
     </div>
-    
-    
+
+
   </React.StrictMode>
   ,
   document.getElementById('root')
