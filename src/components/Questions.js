@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { NotificationManager } from "react-notifications";
-import { db } from "../services/firebase";
-import Button from "react-bootstrap/Button";
-import "../styles/Questions.css";
+import { NotificationManager } from 'react-notifications';
+import { db } from '../services/firebase';
+import Button from 'react-bootstrap/Button';
+import '../styles/Questions.css';
 
 
 class Questions extends React.Component {
@@ -14,12 +14,12 @@ class Questions extends React.Component {
       asking: false,
       questions: [],
       formValues: {
-        user: "",
-        question: ""
+        user: '',
+        question: ''
       },
       formErrors: {
-        user: "",
-        question: ""
+        user: '',
+        question: ''
       },
       formValidity: {
         user: false,
@@ -39,16 +39,16 @@ class Questions extends React.Component {
       uid: this.state.formValues.question
     };
     console.log(data);
-    db.collection("questions")
+    db.collection('questions')
       .doc(data.uid.toString())
       .set(data)
       .then(() => {
-        NotificationManager.success("A new question has been asked", "Success");
+        NotificationManager.success('A new question has been asked', 'Success');
         this.setState({ isSubmitting: false });
         this.getLatestSnapshot();
       })
       .catch(error => {
-        NotificationManager.error(error.message, "Addition of question failed");
+        NotificationManager.error(error.message, 'Addition of question failed');
         this.setState({ isSubmitting: false });
       });
   };
@@ -60,7 +60,7 @@ class Questions extends React.Component {
     if (Object.values(formValidity).every(Boolean)) {
       this.addQuestion();
       this.setState({ asking: false });
-      console.log("not asking");
+      console.log('not asking');
     } else {
       for (let key in formValues) {
         let target = {
@@ -70,8 +70,8 @@ class Questions extends React.Component {
         this.handleValidation(target);
       }
       NotificationManager.error(
-        "Please check on the validation message below form fields",
-        "Validation error"
+        'Please check on the validation message below form fields',
+        'Validation error'
       );
       this.setState({ isSubmitting: false });
     }
@@ -88,12 +88,12 @@ class Questions extends React.Component {
     const { name, value } = target;
     const fieldValidationErrors = this.state.formErrors;
     const validity = this.state.formValidity;
-    const isImage = name === "image";
+    const isImage = name === 'image';
 
     if (!isImage) {
       validity[name] = value.length > 0;
       fieldValidationErrors[name] = validity[name]
-        ? ""
+        ? ''
         : `${name} is required and cannot be empty`;
     }
 
@@ -104,7 +104,7 @@ class Questions extends React.Component {
   };
 
   getLatestSnapshot() {
-    db.collection("questions")
+    db.collection('questions')
       .onSnapshot(querySnapshot => {
         const data = querySnapshot.docs.map(doc => doc.data());
         console.log(data);
@@ -113,11 +113,11 @@ class Questions extends React.Component {
   }
 
   handleClick(question) {
-    db.collection("questions").doc(question).delete().then(() => {
-      console.log("Document successfully deleted!");
+    db.collection('questions').doc(question).delete().then(() => {
+      console.log('Document successfully deleted!');
       this.getLatestSnapshot();
     }).catch(function (error) {
-      console.error("Error removing document: ", error);
+      console.error('Error removing document: ', error);
     });
   };
 
@@ -134,70 +134,70 @@ class Questions extends React.Component {
     console.log(questions);
     return (
       <>
-        <div className="row">
+        <div className='row'>
           {questions.map(question => (
-            <div key={question.uid} className="questionCard">
-              <div className="card-body" style={{ margin: 1 }}>
+            <div key={question.uid} className='questionCard'>
+              <div className='card-body' style={{ margin: 1 }}>
                 <h5>{question.user}</h5>
                 <h6>{question.question}</h6>
-                <Button variant="outlined" color="primary" onClick={this.handleClick.bind(this, question.question)}>
+                <Button variant='outlined' color='primary' onClick={this.handleClick.bind(this, question.question)}>
                   Resolve
                 </Button>
               </div>
             </div>
           ))}
         </div>
-        <div className="row mb-5">
-          <div className="col-lg-12 text-center">
+        <div className='row mb-5'>
+          <div className='col-lg-12 text-center'>
             <button
-              type="submit"
-              className="btn btn-primary btn-block"
+              type='submit'
+              className='btn btn-primary btn-block'
               style={{ marginTop: '10px' }}
               disabled={isSubmitting}
               onClick={this.handleAsk.bind(this)}
             >
               Ask something!
               </button>
-            {asking == true ? <span><div className="row">
-              <div className="col-lg-12">
+            {asking == true ? <span><div className='row'>
+              <div className='col-lg-12'>
                 <form onSubmit={this.handleSubmit}>
-                  <div className="form-group">
+                  <div className='form-group'>
                     <label>Your name</label>
                     <input
-                      type="text"
-                      name="user"
-                      className={`form-control ${formErrors.user ? "is-invalid" : ""
+                      type='text'
+                      name='user'
+                      className={`form-control ${formErrors.user ? 'is-invalid' : ''
                         }`}
-                      placeholder="Enter your name"
+                      placeholder='Enter your name'
                       onChange={this.handleChange}
                       value={formValues.user}
                     />
-                    <div className="invalid-feedback">{formErrors.name}</div>
+                    <div className='invalid-feedback'>{formErrors.name}</div>
                   </div>
-                  <div className="form-group">
+                  <div className='form-group'>
                     <label>Question</label>
                     <input
-                      type="text"
-                      name="question"
-                      className={`form-control ${formErrors.question ? "is-invalid" : ""
+                      type='text'
+                      name='question'
+                      className={`form-control ${formErrors.question ? 'is-invalid' : ''
                         }`}
-                      placeholder="Enter your question"
+                      placeholder='Enter your question'
                       onChange={this.handleChange}
                       value={formValues.question}
                     />
-                    <div className="invalid-feedback">{formErrors.question}</div>
+                    <div className='invalid-feedback'>{formErrors.question}</div>
                   </div>
                   <button
-                    type="submit"
-                    className="btn btn-primary btn-block"
+                    type='submit'
+                    className='btn btn-primary btn-block'
                     disabled={isSubmitting}
                     onClick={this.handleSubmit.bind(this)}
                   >
-                    {isSubmitting ? "Please wait..." : "Submit"}
+                    {isSubmitting ? 'Please wait...' : 'Submit'}
                   </button>
                   <button
-                    type="cancel"
-                    className="btn btn-primary btn-block"
+                    type='cancel'
+                    className='btn btn-primary btn-block'
                     disabled={isSubmitting}
                     onClick={this.handleCancel.bind(this)}
                   >

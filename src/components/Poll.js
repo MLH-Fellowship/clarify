@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { db, increment, decrement } from "../services/firebase";
+import { db, increment, decrement } from '../services/firebase';
 
 // Components
 import SentimentButton from './SentimentButton';
@@ -57,7 +57,7 @@ function Poll(props) {
   return (
     <>
       <BarChart2 data={data} labels={pollOptions} />
-      <Radio.Group onChange={onChange} defaultValue='🙂' size="medium" style={{ margin: 30 }}>
+      <Radio.Group onChange={onChange} defaultValue='🙂' size='medium' style={{ margin: 30 }}>
         {buttons}
       </Radio.Group>
     </>
