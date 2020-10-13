@@ -1,10 +1,8 @@
 import React from 'react';
-
 import { NotificationManager } from 'react-notifications';
 import { db } from '../services/firebase';
-import Button from 'react-bootstrap/Button';
-import '../styles/Questions.css';
 
+import QuestionCard from './QuestionCard';
 
 class Questions extends React.Component {
 
@@ -36,12 +34,9 @@ class Questions extends React.Component {
   addQuestion = () => {
     const data = {
       ...this.state.formValues,
-      uid: this.state.formValues.question
+      likes: 0
     };
-    console.log(data);
-    db.collection('questions')
-      .doc(data.uid.toString())
-      .set(data)
+    db.collection('questions').add(data)
       .then(() => {
         NotificationManager.success('A new question has been asked', 'Success');
         this.setState({ isSubmitting: false });
@@ -106,13 +101,12 @@ class Questions extends React.Component {
   getLatestSnapshot() {
     db.collection('questions')
       .onSnapshot(querySnapshot => {
-        const data = querySnapshot.docs.map(doc => doc.data());
-        console.log(data);
+        const data = querySnapshot.docs.map(function (doc) { return { ...doc.data(), id: doc.id } });
         this.setState({ questions: data });
       });
   }
 
-  handleClick(question) {
+  handleResolve(question) {
     db.collection('questions').doc(question).delete().then(() => {
       console.log('Document successfully deleted!');
       this.getLatestSnapshot();
@@ -129,24 +123,17 @@ class Questions extends React.Component {
     this.setState({ asking: false });
   }
 
+
   render() {
     const { asking, questions, formValues, formErrors, isSubmitting } = this.state;
-    console.log(questions);
+
+    var allQuestions = questions.map(question => {
+      return <QuestionCard questionId={question.id} key={question.id} onResolve={this.handleResolve.bind(this, question.question)} />;
+    });
+
     return (
       <>
-        <div className='row'>
-          {questions.map(question => (
-            <div key={question.uid} className='questionCard'>
-              <div className='card-body' style={{ margin: 1 }}>
-                <h5>{question.user}</h5>
-                <h6>{question.question}</h6>
-                <Button variant='outlined' color='primary' onClick={this.handleClick.bind(this, question.question)}>
-                  Resolve
-                </Button>
-              </div>
-            </div>
-          ))}
-        </div>
+        {allQuestions}
         <div className='row mb-5'>
           <div className='col-lg-12 text-center'>
             <button

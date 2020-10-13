@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/HomePage.css';
+// import '../styles/HomePage.css';
 import DocumentTitle from 'react-document-title';
 import Register from './Questions';
 import Poll from './Poll';
