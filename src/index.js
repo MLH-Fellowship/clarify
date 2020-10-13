@@ -1,21 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './styles/index.css';
-import 'antd/dist/antd.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-
-import "bootstrap/dist/css/bootstrap.css";
-import "react-notifications/lib/notifications.css";
-
 import { NotificationContainer } from "react-notifications";
+
+// Components
 import Questions from "./components/Questions";
 import Poll from "./components/Poll";
+
+// Styles
+import "bootstrap/dist/css/bootstrap.css";
+import "react-notifications/lib/notifications.css";
+import 'antd/dist/antd.css';
+
+import './styles/index.css';
 import './styles/format.css';
 
 ReactDOM.render(
   <React.StrictMode>
     <NotificationContainer />
+    <h1 style={{ padding: 25 }}>clarify</h1>
     <div id='flexbox'>
       <div class='questions'>
         <Questions />

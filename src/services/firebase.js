@@ -12,5 +12,18 @@ const firebaseApp = firebase.initializeApp({
 });
 
 const db = firebaseApp.firestore();
+const increment = firebase.firestore.FieldValue.increment(1);
+const decrement = firebase.firestore.FieldValue.increment(-1);
 
-export {db};
+const getPoll = async => {
+    var result = [];
+    db.collection('poll')
+        .get().then(snapshot => {
+            snapshot.forEach(function (doc) {
+                result.push({ name: doc.id, count: doc.data().count });
+            });
+        });
+    return result;
+}
+
+export { db, increment, decrement };

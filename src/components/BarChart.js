@@ -1,10 +1,10 @@
 import React from 'react';
 
 function BarGroup(props) {
-  let heightScale = d => d * 25
+  let heightScale = d => d * 25;
 
-  let height = heightScale(props.d.count)
-  let xMid = props.barWidth * 0.45
+  let height = heightScale(props.d.count);
+  let xMid = props.barWidth * 0.45;
 
   return (
     <g className="bar-group">

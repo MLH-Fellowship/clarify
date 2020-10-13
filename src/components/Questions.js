@@ -137,11 +137,13 @@ class Questions extends React.Component {
         <div className="row">
           {questions.map(question => (
             <div key={question.uid} className="questionCard">
-              <h5>{question.user}</h5>
-              <h6>{question.question}</h6>
-              <Button variant="outlined" color="primary" onClick={this.handleClick.bind(this, question.question)}>
-                Resolve
-                  </Button>
+              <div className="card-body" style={{ margin: 1 }}>
+                <h5>{question.user}</h5>
+                <h6>{question.question}</h6>
+                <Button variant="outlined" color="primary" onClick={this.handleClick.bind(this, question.question)}>
+                  Resolve
+                </Button>
+              </div>
             </div>
           ))}
         </div>
