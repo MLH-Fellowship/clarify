@@ -3,7 +3,7 @@ import { Comment, Tooltip, Avatar } from 'antd';
 import Avatars from '../images';
 import moment from 'moment';
 import { LikeOutlined, LikeFilled } from '@ant-design/icons';
-import { db, firebase, increment, decrement } from '../services/firebase';
+import { db, increment, decrement } from '../services/firebase';
 
 function randomInteger(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -33,8 +33,6 @@ const QuestionCard = ({ questionId, onResolve }) => {
     dateArr.push(dateObj.getHours());
     dateArr.push(dateObj.getMinutes());
     dateArr.push(dateObj.getSeconds());
-
-    console.log(dateArr);
     return moment(dateArr).fromNow();
   }
 
@@ -64,6 +62,14 @@ const QuestionCard = ({ questionId, onResolve }) => {
     return unsubscribe;
   }, [questionId]);
 
+  function resolve() {
+    db.collection('questions').doc(questionId).delete().then(() => {
+      console.log('Document successfully deleted!');
+    }).catch(function (error) {
+      console.error('Error removing document: ', error);
+    });
+  };
+
   const like = () => {
     if (liked) {
       let target = db.collection('questions').doc(questionId);
@@ -84,7 +90,7 @@ const QuestionCard = ({ questionId, onResolve }) => {
     </Tooltip>,
 
     <Tooltip key="comment-basic-resolve" title="Remove question">
-      <span onClick={onResolve} key="comment-basic-resolve-">Resolve</span>
+      <span onClick={resolve} key="comment-basic-resolve-">Resolve</span>
     </Tooltip>
   ];
 

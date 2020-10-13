@@ -1,6 +1,10 @@
 import React from 'react';
 import { NotificationManager } from 'react-notifications';
 import { db, firebase } from '../services/firebase';
+import { SendOutlined } from '@ant-design/icons';
+import { Input } from 'antd';
+
+// Components
 import QuestionCard from './QuestionCard';
 
 class Questions extends React.Component {
@@ -105,16 +109,6 @@ class Questions extends React.Component {
         this.setState({ questions: data });
       });
   }
-
-  handleResolve(question) {
-    db.collection('questions').doc(question).delete().then(() => {
-      console.log('Document successfully deleted!');
-      this.getLatestSnapshot();
-    }).catch(function (error) {
-      console.error('Error removing document: ', error);
-    });
-  };
-
   handleAsk() {
     this.setState({ asking: true });
   }
@@ -126,14 +120,19 @@ class Questions extends React.Component {
 
   render() {
     const { asking, questions, formValues, formErrors, isSubmitting } = this.state;
+    const { Search } = Input;
 
     var allQuestions = questions.map(question => {
-      return <QuestionCard questionId={question.id} key={question.id} onResolve={this.handleResolve.bind(this, question.question)} />;
+      return <QuestionCard questionId={question.id} key={question.id} />;
     });
 
     return (
       <>
         {allQuestions}
+        {/* <>
+
+          <Search placeholder="Write a question..." size='medium' onSearch={value => console.log(value)} bordered={false} enterButton='Ask' />
+        </> */}
         <div className='row mb-5'>
           <div className='col-lg-12 text-center'>
             <button
