@@ -43,7 +43,11 @@ function Poll(props) {
 
     // decrement previous selection
     const prev = db.collection('poll').doc(active);
-    prev.update({ count: decrement });
+    prev.get().then(function (doc) {
+      if (doc.data().count > 0) {
+        prev.update({ count: decrement });
+      }
+    });
     setActive(e.target.value);
   }
 
