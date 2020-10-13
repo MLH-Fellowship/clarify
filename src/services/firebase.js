@@ -1,4 +1,6 @@
-import firebase from 'firebase';
+import * as firebase from 'firebase';
+// import * as firebase from 'firebase';
+import 'firebase/firestore';
 
 const firebaseApp = firebase.initializeApp({
     apiKey: 'AIzaSyCXZ3IgNwq1vczQYOoL_c0cph91RXxnKTw',
@@ -15,4 +17,4 @@ const db = firebaseApp.firestore();
 const increment = firebase.firestore.FieldValue.increment(1);
 const decrement = firebase.firestore.FieldValue.increment(-1);
 
-export { db, increment, decrement };
+export { db, increment, decrement, firebase };

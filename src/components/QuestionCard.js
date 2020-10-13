@@ -3,7 +3,7 @@ import { Comment, Tooltip, Avatar } from 'antd';
 import Avatars from '../images';
 import moment from 'moment';
 import { LikeOutlined, LikeFilled } from '@ant-design/icons';
-import { db, increment, decrement } from '../services/firebase';
+import { db, firebase, increment, decrement } from '../services/firebase';
 
 function randomInteger(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -15,16 +15,41 @@ const QuestionCard = ({ questionId, onResolve }) => {
   const avatar = Avatars[randomInteger(0, 50)]; // Store avatar this in Questions.js
   const [user, setUser] = useState();
   const [text, setText] = useState();
+  const [date, setDate] = useState();
+
+  // helper for date processing
+  function toDateTime(secs) {
+    var t = new Date(Date.UTC(1970, 0, 1)); // Epoch
+    t.setUTCSeconds(secs);
+    return t;
+  }
+
+  function timeAgo(dateObj) {
+    let dateArr = [];
+
+    dateArr.push(dateObj.getFullYear());
+    dateArr.push(dateObj.getMonth());
+    dateArr.push(dateObj.getDate());
+    dateArr.push(dateObj.getHours());
+    dateArr.push(dateObj.getMinutes());
+    dateArr.push(dateObj.getSeconds());
+
+    console.log(dateArr);
+    return moment(dateArr).fromNow();
+  }
 
   useEffect(() => {
     if (!db.collection('questions')) return;
 
     // Initialize question data
-    let docRef = db.collection('questions').doc(questionId);
+    const docRef = db.collection('questions').doc(questionId);
     docRef.get().then(function (doc) {
       setLikes(doc.data().likes);
       setUser(doc.data().user);
       setText(doc.data().question);
+
+      const dateObj = new Date(toDateTime(doc.data().created.seconds));
+      setDate(timeAgo(dateObj));
     }).catch(function (error) {
       console.log("Error getting document:", error);
     });
@@ -33,6 +58,8 @@ const QuestionCard = ({ questionId, onResolve }) => {
     const unsubscribe = db.collection('questions').doc(questionId)
       .onSnapshot(function (doc) {
         setLikes(doc.data().likes);
+        let dateObj = new Date(toDateTime(doc.data().created.seconds));
+        setDate(timeAgo(dateObj));
       });
     return unsubscribe;
   }, [questionId]);
@@ -72,9 +99,12 @@ const QuestionCard = ({ questionId, onResolve }) => {
             alt="Avatar icon"
           />
         }
-        content={<h5>{text}</h5>}
+        content={
+          // <h5>{text}</h5>
+          <p style={{ fontSize: 14, fontWeight: 'bold' }}>{text}</p>
+        }
         datetime={
-          <span>{moment().fromNow()}</span>
+          <span>{date}</span>
         }
       />
     </>

@@ -1,7 +1,6 @@
 import React from 'react';
 import { NotificationManager } from 'react-notifications';
-import { db } from '../services/firebase';
-
+import { db, firebase } from '../services/firebase';
 import QuestionCard from './QuestionCard';
 
 class Questions extends React.Component {
@@ -34,7 +33,8 @@ class Questions extends React.Component {
   addQuestion = () => {
     const data = {
       ...this.state.formValues,
-      likes: 0
+      likes: 0,
+      created: firebase.firestore.Timestamp.fromDate(new Date())
     };
     db.collection('questions').add(data)
       .then(() => {
