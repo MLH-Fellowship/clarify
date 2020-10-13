@@ -7,8 +7,10 @@ import BarChart2 from './BarChart2';
 import { Radio } from 'antd';
 
 function Poll(props) {
+  const pollOptions = ['😳', '😕', '🙂', '😁']
+  const defaultOption = pollOptions[2];
   const [data, setData] = useState([]);
-  const [active, setActive] = useState('🙂');
+  const [active, setActive] = useState(defaultOption);
 
   // when user leaves, decrement the prev selection
   window.onbeforeunload = function () {
@@ -16,16 +18,14 @@ function Poll(props) {
     prev.update({ count: decrement });
   }
 
-  // When user signs on, increment the default selection
-  useEffect(() => {
-    const target = db.collection('poll').doc(active);
-    target.update({ count: increment });
-    console.log('increment');
-  }, []);
-
-  // Update data when db collection is modified 
   useEffect(() => {
     if (!db.collection('poll')) return;
+
+    // When user signs on, increment the default selection
+    const target = db.collection('poll').doc(defaultOption);
+    target.update({ count: increment });
+
+    // Listen for changes in votes and push to all clients
     const unsubscribe = db.collection('poll').onSnapshot(function (snapshot) {
       var result = [];
       snapshot.forEach(function (doc) {
@@ -34,12 +34,7 @@ function Poll(props) {
       setData(result);
     });
     return unsubscribe;
-  }, []);
-
-  // Buttons
-  const pollOptions = [
-    '😳', '😕', '🙂', '😁'
-  ]
+  }, [defaultOption]);
 
   function onChange(e) {
     // increment selection
@@ -57,7 +52,7 @@ function Poll(props) {
   return (
     <>
       <BarChart2 data={data} labels={pollOptions} />
-      <Radio.Group onChange={onChange} defaultValue='🙂' size='medium' style={{ margin: 30 }}>
+      <Radio.Group onChange={onChange} defaultValue={defaultOption} size='medium' style={{ margin: 30 }}>
         {buttons}
       </Radio.Group>
     </>

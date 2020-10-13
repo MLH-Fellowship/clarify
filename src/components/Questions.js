@@ -158,7 +158,7 @@ class Questions extends React.Component {
             >
               Ask something!
               </button>
-            {asking == true ? <span><div className='row'>
+            {asking === true ? <span><div className='row'>
               <div className='col-lg-12'>
                 <form onSubmit={this.handleSubmit}>
                   <div className='form-group'>

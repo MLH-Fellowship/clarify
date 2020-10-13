@@ -1,7 +1,6 @@
 import React from 'react';
 import Chart from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
-import '../styles/format.css';
 
 let myChart;
 

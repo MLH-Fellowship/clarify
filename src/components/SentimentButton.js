@@ -1,5 +1,5 @@
 import React from 'react';
-import { Radio, Button } from 'antd';
+import { Radio } from 'antd';
 
 const SentimentButton = (props) => {
   return (
