@@ -1,12 +1,12 @@
 import React from 'react';
-import Button from 'react-bootstrap/Button';
+import { Radio, Button } from 'antd';
 
 const SentimentButton = (props) => {
   return (
     <>
-      <Button variant='primary' name={props.text} onClick={props.onClick} style={{ margin: 8 , backgroundColor: "paleturquoise", borderColor:"paleturquoise"}}>
+      <Radio.Button value={props.text} buttonStyle='solid' style={{ minWidth: '80px', textAlign: 'center', fontSize: '18px', backgroundColor: props.color }}>
         {props.text}
-      </Button>
+      </Radio.Button>
     </>
   );
 }

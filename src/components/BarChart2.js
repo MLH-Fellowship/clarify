@@ -1,5 +1,6 @@
 import React from 'react';
 import Chart from 'chart.js';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 import '../styles/format.css';
 
 let myChart;
@@ -18,7 +19,7 @@ class BarChart2 extends React.Component {
 
   buildChart = () => {
 
-    const myChartRef = this.chartRef.current.getContext("2d");
+    const myChartRef = this.chartRef.current.getContext('2d');
 
     if (myChart) {
       myChart.destroy();
@@ -37,39 +38,66 @@ class BarChart2 extends React.Component {
     // map into [#, #, #...] to use in chart datasets
     data = data.map(o => Object.values(o)[0]);
 
+    var color = data.map(x => '#48b2ff');
+    // color[color.indexOf(Math.max(...color))] = '#1890ff';
+    // console.log(color);
+
+    Chart.defaults.global.defaultFontSize = 14;
+    // Chart.defaults.global.defaultFontFamily = 'Source Sans Pro';
     myChart = new Chart(myChartRef, {
-      type: "bar",
+      plugins: [ChartDataLabels],
+      type: 'bar',
       response: true,
       maintainAspectRatio: false,
       data: {
         labels: labels,
         datasets: [
           {
-            label: "# votes",
+            label: '# votes',
             data: data,
-            backgroundColor: ['rgba(0, 123, 255, 0.5)', 'rgba(0, 123, 255, 0.5)', 'rgba(0, 123, 255, 0.5)', 'rgba(0, 123, 255, 0.5)', 'rgba(0, 123, 255, 0.5)'],
-            borderWidth: 1
+            backgroundColor: color,
+            borderWidth: 0
           }
         ]
       },
       options: {
+        plugins: {
+          // Change options for ALL labels of THIS CHART
+          datalabels: {
+            anchor: 'end',
+            align: 'end',
+            offset: '6',
+            color: '#48b2ff'
+          }
+        },
+        legend: {
+          display: false
+        },
         scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: true,
-              suggestedMax: 50,
-              display: false
-            },
-            gridLines: {
-              display: false
-            }
-          }],
           xAxes: [{
             gridLines: {
-              display: false
+              display: false // vertical lines
+            },
+            ticks: {
+              display: false // axis labels
+            }
+          }],
+          yAxes: [{
+            gridLines: {
+              // borderDash: [4],
+              display: false, // horizontal lines
+              // zeroLineColor: '#fafafa',
+              drawBorder: true, // y axis line
+              // color: '#fafafa'
+            },
+            ticks: {
+              display: false, // axis labels
+              beginAtZero: true,
+              suggestedMax: 50
             }
           }]
-        },
+        }
+        ,
         animation: {
           duration: 0
         }
@@ -78,7 +106,7 @@ class BarChart2 extends React.Component {
   }
 
   render() {
-    return <canvas id="myChart" ref={this.chartRef}/>
+    return <canvas id='myChart' ref={this.chartRef} />
   };
 }
 

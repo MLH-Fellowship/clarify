@@ -1,7 +1,7 @@
 #flexbox {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    /* border: 5px solid black; */
+    align-items: center;
     margin: 20px;
 }
 
@@ -22,13 +22,17 @@
 }
 
 .questions {
-    border: 2px dotted black;
+    /* border: 2px dotted black; */
     padding: 20px;
 }
 
 .poll {
-    border: 2px dotted black;
-    padding: 20px;
+    /* border-left: 2px solid #f5f5f5; */
+    padding: 50px;
+}
+
+canvas {
+   /* background-color: #fafafa; */
 }
 
 #myChart {

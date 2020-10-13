@@ -1,17 +1,16 @@
 import React from 'react';
 
 function BarGroup(props) {
-  let barColour = "paleturquoise"
-  let heightScale = d => d * 25
+  let heightScale = d => d * 25;
 
-  let height = heightScale(props.d.count)
-  let xMid = props.barWidth * 0.45
+  let height = heightScale(props.d.count);
+  let xMid = props.barWidth * 0.45;
 
   return (
-    <g className="bar-group">
-      <text className="name-label" y="-8" x={xMid + 5} alignmentBaseline="middle" >{props.d.name}</text>
+    <g className='bar-group'>
+      <text className='name-label' y='-8' x={xMid + 5} alignmentBaseline='middle' >{props.d.name}</text>
       <rect y={props.barPadding * 0.5} width={props.barWidth - props.barPadding} height={height} fill={barColour} />
-      {props.d.count && <text className="value-label" y={height - 8} x={xMid} alignmentBaseline="middle" >{props.d.count}</text>}
+      {props.d.count && <text className='value-label' y={height - 8} x={xMid} alignmentBaseline='middle' >{props.d.count}</text>}
     </g>
   );
 }
@@ -27,9 +26,9 @@ function BarChart(props) {
   )
 
   return (
-    <svg width="800" height="800">
-      <g className="container">
-        <g className="chart" transform="translate(100,60)">
+    <svg width='800' height='800'>
+      <g className='container'>
+        <g className='chart' transform='translate(100,60)'>
           {barGroups}
         </g>
       </g>
