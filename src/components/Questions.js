@@ -29,19 +29,23 @@ class Questions extends React.Component {
 
   render() {
     const { questions } = this.state;
+    
     var allQuestions = questions.map(question => {
       return <QuestionCard roomId={this.props.roomId} questionId={question.id} key={question.id} />;
     });
-
+    
     return (
       <>
+      <div style={{height: "300px", overflowY: "auto"}}>
         {allQuestions}
+        </div>
         <>
           <QuestionForm roomId={this.props.roomId} />
         </>
       </>
     );
   }
+  
 }
 
 export default Questions;
