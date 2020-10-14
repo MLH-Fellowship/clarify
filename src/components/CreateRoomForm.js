@@ -3,9 +3,9 @@ import { notification } from 'antd'
 import { SmileTwoTone } from '@ant-design/icons';
 import { withRouter } from 'react-router-dom'; // <--- import `withRouter`. We will use this in the bottom of our file.
 
-import { createRoom } from "../services/firebase"
+import { createRoom } from '../services/firebase'
 
-import "../styles/home.css";
+import '../styles/home.css';
 
 const CreateRoomForm = (props) => {
   function generate() {
@@ -40,7 +40,7 @@ const CreateRoomForm = (props) => {
 
   return (
     <div>
-      <button id = 'createButton' className='btn' onClick={onClick} style={{backgroundColor: "#00134d", color: "#ffffff"}}> Create a new room</button>
+      <button id='createButton' className='btn' onClick={onClick} style={{ color: '#ffffff', borderRadius: '15px' }}> Create a new room</button>
     </div>
   );
 

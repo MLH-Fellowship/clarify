@@ -1,10 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Form, Input, message, Button } from 'antd';
 import { ArrowUpOutlined } from '@ant-design/icons'
-import { firebase, addQuestion } from '../services/firebase';
+import { firebase, auth, addQuestion } from '../services/firebase';
+import Avatars from '../images';
 
 const QuestionForm = ({ user, roomId }) => {
   const [form] = Form.useForm();
+  const [avatarIndex, setIndex] = useState(1);
+  var avatar = Avatars[avatarIndex];
+
+  auth.onAuthStateChanged(function (user) {
+    if (user) {
+      var seedrandom = require('seedrandom');
+      var rng = seedrandom(user.uid);
+      var i = Math.floor(rng() * 49);
+      setIndex(i);
+      avatar = Avatars[avatarIndex];
+    }
+  });
 
   const success = () => {
     message.success({
@@ -17,11 +30,14 @@ const QuestionForm = ({ user, roomId }) => {
 
   const onFinish = values => {
     if (values.questionBox.replace(/\s/g, '').length) {
+
+      // Create new question document
       const data = {
         user: tempName,
         question: values.questionBox,
         likes: 0,
-        created: firebase.firestore.Timestamp.fromDate(new Date())
+        created: firebase.firestore.Timestamp.fromDate(new Date()),
+        avatar: avatar
       };
       addQuestion(roomId, data, success);
     }
