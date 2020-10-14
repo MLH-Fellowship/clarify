@@ -5,9 +5,20 @@ import { db, firebase } from '../services/firebase';
 // Components
 import QuestionCard from './QuestionCard';
 import QuestionForm from './QuestionForm';
+import { db } from '../services/firebase';
+
+import { useParams } from "react-router";
+
+var collectionName = "questions";
+
+function Collection() {
+  let { id } = useParams();
+  collectionName = id;
+  return " ";
+}
 
 class Questions extends React.Component {
-
+  
   constructor(props, state) {
     super();
     this.state = {
@@ -38,7 +49,8 @@ class Questions extends React.Component {
   };
 
   getLatestSnapshot() {
-    db.collection('questions')
+    // collectionName = Collection();
+    db.collection(collectionName)
       .onSnapshot(querySnapshot => {
         const data = querySnapshot.docs.map(function (doc) { return { ...doc.data(), id: doc.id } });
         data.sort((a, b) => { return b.likes - a.likes || a.created.seconds - b.created.seconds });
@@ -58,6 +70,7 @@ class Questions extends React.Component {
         {allQuestions}
         <>
           <QuestionForm />
+          <Collection />
         </>
       </>
     );
