@@ -1,11 +1,10 @@
 import React from 'react';
 import { NotificationManager } from 'react-notifications';
 import { db, firebase } from '../services/firebase';
-import { SendOutlined } from '@ant-design/icons';
-import { Input } from 'antd';
 
 // Components
 import QuestionCard from './QuestionCard';
+import QuestionForm from './QuestionForm';
 
 class Questions extends React.Component {
 
@@ -117,10 +116,9 @@ class Questions extends React.Component {
     this.setState({ asking: false });
   }
 
-
   render() {
     const { asking, questions, formValues, formErrors, isSubmitting } = this.state;
-    const { Search } = Input;
+
 
     var allQuestions = questions.map(question => {
       return <QuestionCard questionId={question.id} key={question.id} />;
@@ -129,11 +127,16 @@ class Questions extends React.Component {
     return (
       <>
         {allQuestions}
+        <>
+          <QuestionForm />
+        </>
         {/* <>
+          <Form>
+            <Search placeholder="Write a question..." size='medium' onSearch={this.handleSend} bordered={false} enterButton='Ask' />
+          </Form>
 
-          <Search placeholder="Write a question..." size='medium' onSearch={value => console.log(value)} bordered={false} enterButton='Ask' />
         </> */}
-        <div className='row mb-5'>
+        {/* <div className='row mb-5'>
           <div className='col-lg-12 text-center'>
             <button
               type='submit'
@@ -193,7 +196,7 @@ class Questions extends React.Component {
               </div>
             </div></span> : null}
           </div>
-        </div>
+        </div> */}
       </>
     );
   }

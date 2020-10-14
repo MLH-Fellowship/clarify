@@ -82,7 +82,7 @@ const QuestionCard = ({ questionId, onResolve }) => {
   };
 
   const actions = [
-    <Tooltip key="comment-basic-like" title="Like">
+    <Tooltip key="comment-basic-like" title={!liked ? 'Like' : 'Unlike'}>
       <span onClick={like}>
         {!liked ? <LikeOutlined /> : <LikeFilled />}
         <span className="comment-action">{likes}</span>
