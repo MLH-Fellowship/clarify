@@ -2,6 +2,7 @@ import React from 'react';
 import { Form, Input, message, Button } from 'antd';
 import { ArrowUpOutlined } from '@ant-design/icons'
 import { firebase, addQuestion } from '../services/firebase';
+import '../styles/format.css';
 
 const QuestionForm = ({ user, roomId }) => {
   const [form] = Form.useForm();
@@ -30,14 +31,18 @@ const QuestionForm = ({ user, roomId }) => {
 
   return (
     <>
-      <Form form={form} name="horizontal_login" layout="inline" onFinish={onFinish}>
-        <div style={{marginTop: '10px'}}>
+
+      <Form id = 'questionForm' form={form} name="horizontal_login" layout="inline" 
+            onFinish={onFinish} style={{marginTop: '10px'}}>
+
         <Form.Item name='questionBox'>
           <Input placeholder="Ask a question..."
             style={{
               borderRadius: '5px',
               backgroundColor: '#f0f0f0',
-              minWidth: '640px'
+              margin: '5px',
+              width: '100%'
+
             }} size={'medium'} bordered={false} />
         </Form.Item>
         </div>
