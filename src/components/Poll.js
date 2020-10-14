@@ -4,7 +4,7 @@ import { db, enterPollVote } from '../services/firebase';
 // Components
 import SentimentButton from './SentimentButton';
 import BarChart2 from './BarChart2';
-import { Radio } from 'antd';
+import { Radio, Row } from 'antd';
 
 function Poll({ roomId }) {
 
@@ -51,6 +51,7 @@ function Poll({ roomId }) {
       <Radio.Group onChange={onChange} defaultValue={defaultOption} size='medium' style={{ width: '100%'}}>
         {buttons}
       </Radio.Group> 
+
     </>
   )
 }
