@@ -66,7 +66,14 @@ class BarChart2 extends React.Component {
             anchor: 'end',
             align: 'end',
             offset: '6',
-            color: '#48b2ff'
+            color: '#48b2ff',
+            labels: {
+              values: {
+                font: {
+                  weight: 'bold'
+                }
+              }
+            }
           }
         },
         legend: {

@@ -48,7 +48,11 @@ function Room(props) {
                 <div class='questions'>
                     <h3> Questions </h3>
                     <div class='questionDiv'>
-                        <Questions roomId={id} />
+                        <Questions roomId={id} style={{
+                            position: 'absolute',
+                            left: '100px',
+                            display: 'flex',
+                        }} />
                     </div>
                 </div>
                 <div class='poll'>
