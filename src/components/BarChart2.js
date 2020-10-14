@@ -55,7 +55,7 @@ class BarChart2 extends React.Component {
             label: '# votes',
             data: data,
             backgroundColor: color,
-            borderWidth: 0
+            borderWidth: 0,
           }
         ]
       },
@@ -66,7 +66,14 @@ class BarChart2 extends React.Component {
             anchor: 'end',
             align: 'end',
             offset: '6',
-            color: '#48b2ff'
+            color: '#48b2ff',
+            labels: {
+              title: {
+                font: {
+                  weight: 'bold'
+                }
+              }
+            }
           }
         },
         legend: {
