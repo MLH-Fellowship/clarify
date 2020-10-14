@@ -37,7 +37,7 @@ class BarChart2 extends React.Component {
     // map into [#, #, #...] to use in chart datasets
     data = data.map(o => Object.values(o)[0]);
 
-    var color = data.map(x => '#48b2ff');
+    var color = data.map(x => this.props.color);
     // color[color.indexOf(Math.max(...color))] = '#1890ff';
     // console.log(color);
 

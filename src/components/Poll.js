@@ -13,7 +13,7 @@ function Poll(props) {
   const [active, setActive] = useState(defaultOption);
 
   // when user leaves, decrement the prev selection
-  window.onbeforeunload = function () {
+  window.onunload = function () {
     const prev = db.collection('poll').doc(active);
     prev.update({ count: decrement });
   }
@@ -43,15 +43,19 @@ function Poll(props) {
 
     // decrement previous selection
     const prev = db.collection('poll').doc(active);
-    prev.update({ count: decrement });
+    prev.get().then(function (doc) {
+      if (doc.data().count > 0) {
+        prev.update({ count: decrement });
+      }
+    });
     setActive(e.target.value);
   }
 
-  const buttons = pollOptions.map((option) => <SentimentButton text={option} color={option === active ? '#2190e0' : '#f0f0f0'} />)
+  const buttons = pollOptions.map((option) => <SentimentButton text={option} color={option === active ? '#007bff' : '#f0f0f0'} />)
 
   return (
     <>
-      <BarChart2 data={data} labels={pollOptions} />
+      <BarChart2 data={data} labels={pollOptions} color={'#007bff'} />
       <Radio.Group onChange={onChange} defaultValue={defaultOption} size='medium' style={{ margin: 30 }}>
         {buttons}
       </Radio.Group>

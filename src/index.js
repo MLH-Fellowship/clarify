@@ -18,7 +18,9 @@ ReactDOM.render(
     <NotificationContainer />
     <h1 style={{ padding: 25 }}>clarify</h1>
     <div id='flexbox'>
+
       <div class='questions'>
+        <h3>Questions</h3>
         <Questions />
       </div>
       <div class='poll'>
