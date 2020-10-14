@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Form, Input, message } from 'antd';
 import { db, firebase } from '../services/firebase';
 
@@ -17,7 +17,7 @@ const QuestionForm = ({ user }) => {
   // onFinish uses the value from Search because Form returns an empty object due to being used as a wrapper
   const onFinish = values => {
     if (typeof values === 'string') {
-      if (values != '') {
+      if (values !== '') {
         const data = {
           user: tempName,
           question: values,
