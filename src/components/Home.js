@@ -27,7 +27,7 @@ export default class Home extends React.Component {
               </div>        
               
               <div className="join">
-                  <h5>Enter an existing room code</h5>
+                  <h5 style={{color: "#00134d"}}>Enter an existing room code</h5>
                   <Form />
               </div>
         </Content>

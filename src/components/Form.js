@@ -62,7 +62,7 @@ class Form extends React.Component {
         <label>
           <input type="text" value={this.state.value} onChange={this.handleChange} />
         </label>
-        <input type="submit" value="Submit" />
+        <input type="submit" value="Submit" style={{backgroundColor: "#00134d", color: "#ffffff"}}/>
       </form>
 
       /*
