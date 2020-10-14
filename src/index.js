@@ -1,12 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import * as serviceWorker from './serviceWorker';
-import { NotificationContainer } from 'react-notifications';
-
-// Components
-import Questions from './components/Questions';
-import Poll from './components/Poll';
-import Room from './components/Room';
 
 // Styles
 import 'bootstrap/dist/css/bootstrap.css';

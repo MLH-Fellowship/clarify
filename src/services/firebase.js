@@ -1,7 +1,6 @@
 import * as firebase from 'firebase';
 // import * as firebase from 'firebase';
 import 'firebase/firestore';
-import { message } from 'antd';
 
 const firebaseApp = firebase.initializeApp({
   apiKey: 'AIzaSyCXZ3IgNwq1vczQYOoL_c0cph91RXxnKTw',

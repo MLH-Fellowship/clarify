@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { notification } from 'antd'
 import { SmileTwoTone } from '@ant-design/icons';
 import { withRouter } from 'react-router-dom'; // <--- import `withRouter`. We will use this in the bottom of our file.
 
-import { createRoom, auth } from "../services/firebase"
+import { createRoom } from "../services/firebase"
 
 const CreateRoomForm = (props) => {
   function generate() {
@@ -26,9 +26,7 @@ const CreateRoomForm = (props) => {
   };
 
 
-  function submitForm(e) {
-    e.preventDefault()
-
+  function onClick() {
     // Generate unique ID
     var roomId = generate();
 
@@ -40,12 +38,10 @@ const CreateRoomForm = (props) => {
 
   return (
     <div>
-      <form onSubmit={submitForm}>
-        <button type="submit">Submit</button>
-      </form>
+      <button className='btn' onClick={onClick}> Create a new room</button>
     </div>
   );
 
 }
 
-export default withRouter(CreateRoomForm); // <--- make sure to wrap your component with `withRouter()`
+export default withRouter(CreateRoomForm); 

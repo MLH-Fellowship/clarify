@@ -1,4 +1,4 @@
-import React, { createRef } from 'react';
+import React from 'react';
 import { Form, Input, message, Button } from 'antd';
 import { ArrowUpOutlined } from '@ant-design/icons'
 import { firebase, addQuestion } from '../services/firebase';
@@ -41,7 +41,7 @@ const QuestionForm = ({ user, roomId }) => {
             }} size={'medium'} bordered={false} />
         </Form.Item>
         <Form.Item>
-          <Button type='primary' shape='circle' icon={<ArrowUpOutlined />} size={'medium'} onClick={onFinish} />
+          <Button type='primary' shape='circle' icon={<ArrowUpOutlined />} size={'medium'} htmlType='submit' />
         </Form.Item>
       </Form>
     </>

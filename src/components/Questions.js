@@ -1,6 +1,5 @@
 import React from 'react';
-import { NotificationManager } from 'react-notifications';
-import { db, firebase, getQuestionsSnapshot, getQuestions } from '../services/firebase';
+import { db } from '../services/firebase';
 
 // Components
 import QuestionCard from './QuestionCard';
@@ -20,17 +19,12 @@ class Questions extends React.Component {
   }
 
   getLatestSnapshot() {
-    // collectionName = Collection();
     db.collection('rooms').doc(this.props.roomId).collection('questions')
       .onSnapshot(querySnapshot => {
         const data = querySnapshot.docs.map(function (doc) { return { ...doc.data(), id: doc.id } });
         data.sort((a, b) => { return b.likes - a.likes || a.created.seconds - b.created.seconds });
         this.setState({ questions: data });
       });
-
-    // const questions = getQuestions(this.props.roomId);
-    // console.log(questions);
-    // this.setState({ questions: questions });
   }
 
   render() {

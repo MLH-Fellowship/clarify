@@ -1,6 +1,6 @@
 import React from "react";
 import "../styles/home.css";
-import Form from "./form";
+import Form from "./Form";
 // import "./Footer";
 import CreateRoomForm from "./CreateRoomForm";
 
@@ -14,15 +14,13 @@ export default class Home extends React.Component {
   render() {
 
     return (
-      <div className="home">
+      <div className="home" style={{ width: '100%', height: '100%' }}>
         <div className="join">
-          <h2> Join Room </h2>
+          <h5>Enter an existing room code</h5>
           <Form />
         </div>
 
         <div className="create">
-          <h2> Create Room </h2>
-          <Form />
           <CreateRoomForm />
 
         </div>

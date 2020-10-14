@@ -3,7 +3,7 @@ import { Comment, Tooltip, Avatar } from 'antd';
 import Avatars from '../images';
 import moment from 'moment';
 import { LikeOutlined, LikeFilled } from '@ant-design/icons';
-import { db, likeQuestion, unlikeQuestion, resolveQuestion } from '../services/firebase';
+import { db, likeQuestion, resolveQuestion } from '../services/firebase';
 
 function randomInteger(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -65,7 +65,7 @@ const QuestionCard = ({ questionId, roomId }) => {
       }
     });
     return unsubscribe;
-  }, [questionId]);
+  }, [questionId, roomId]);
 
   function resolve() {
     resolveQuestion(roomId, questionId);
