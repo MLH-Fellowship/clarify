@@ -53,8 +53,4 @@ canvas {
     padding-right: 10px;
 }
 
-.ant-input-group {
-    border-radius: 5px;
-    background-color: #f0f0f0;
-    margin: 5px;
-}
+svg { vertical-align: baseline; }

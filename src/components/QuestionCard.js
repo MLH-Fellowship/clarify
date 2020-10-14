@@ -3,13 +3,13 @@ import { Comment, Tooltip, Avatar } from 'antd';
 import Avatars from '../images';
 import moment from 'moment';
 import { LikeOutlined, LikeFilled } from '@ant-design/icons';
-import { db, increment, decrement } from '../services/firebase';
+import { db, likeQuestion, unlikeQuestion, resolveQuestion } from '../services/firebase';
 
 function randomInteger(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-const QuestionCard = ({ questionId, onResolve }) => {
+const QuestionCard = ({ questionId, roomId }) => {
   const [likes, setLikes] = useState();
   const [liked, setLiked] = useState(false);
   const avatar = Avatars[randomInteger(0, 50)]; // Store avatar this in Questions.js
@@ -40,7 +40,11 @@ const QuestionCard = ({ questionId, onResolve }) => {
     if (!db.collection('questions')) return;
 
     // Initialize question data
-    const docRef = db.collection('questions').doc(questionId);
+    const docRef = db.collection('rooms')
+      .doc(roomId)
+      .collection('questions')
+      .doc(questionId);
+
     docRef.get().then(function (doc) {
       setLikes(doc.data().likes);
       setUser(doc.data().user);
@@ -53,30 +57,25 @@ const QuestionCard = ({ questionId, onResolve }) => {
     });
 
     // Listen for changes in votes and push to all clients
-    const unsubscribe = db.collection('questions').doc(questionId)
-      .onSnapshot(function (doc) {
+    const unsubscribe = docRef.onSnapshot(function (doc) {
+      if (doc.data()) {
         setLikes(doc.data().likes);
         let dateObj = new Date(toDateTime(doc.data().created.seconds));
         setDate(timeAgo(dateObj));
-      });
+      }
+    });
     return unsubscribe;
   }, [questionId]);
 
   function resolve() {
-    db.collection('questions').doc(questionId).delete().then(() => {
-      console.log('Document successfully deleted!');
-    }).catch(function (error) {
-      console.error('Error removing document: ', error);
-    });
+    resolveQuestion(roomId, questionId);
   };
 
   const like = () => {
     if (liked) {
-      let target = db.collection('questions').doc(questionId);
-      target.update({ likes: decrement });
+      likeQuestion(roomId, questionId, false);
     } else {
-      let target = db.collection('questions').doc(questionId);
-      target.update({ likes: increment });
+      likeQuestion(roomId, questionId, true);
     }
     setLiked(!liked);
   };

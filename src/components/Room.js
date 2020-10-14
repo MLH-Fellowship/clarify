@@ -1,7 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import * as serviceWorker from '../serviceWorker';
-// import { NotificationContainer } from 'react-notifications';
 
 // Components
 import Questions from './Questions';
@@ -15,23 +12,23 @@ import '../styles/format.css';
 
 import { useParams } from "react-router";
 
-function Room(props){
+function Room(props) {
     let { id } = useParams();
-        return(
+    return (
         <React.StrictMode>
-            
+
             <h1 style={{ padding: 25 }}>clarify</h1>
             <div id='flexbox'>
-            <div class='questions'>
-                <Questions roomId={id}/>
+                <div class='questions'>
+                    <Questions roomId={id} />
+                </div>
+                <div class='poll'>
+                    <Poll roomId={id} />
+                </div>
             </div>
-            <div class='poll'>
-                <Poll roomId={id}/>
-            </div>
-            </div>
-    
+
         </React.StrictMode>
-        );
-    }
+    );
+}
 
 export default Room;
