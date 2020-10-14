@@ -5,6 +5,8 @@ import { withRouter } from 'react-router-dom'; // <--- import `withRouter`. We w
 
 import { createRoom } from "../services/firebase"
 
+import "../styles/home.css";
+
 const CreateRoomForm = (props) => {
   function generate() {
     var result = '';
@@ -38,7 +40,7 @@ const CreateRoomForm = (props) => {
 
   return (
     <div>
-      <button className='btn' onClick={onClick}> Create a new room</button>
+      <button id = 'createButton' className='btn' onClick={onClick}> Create a new room</button>
     </div>
   );
 
