@@ -53,8 +53,30 @@ canvas {
     padding-right: 10px;
 }
 
-.ant-input-group {
-    border-radius: 5px;
-    background-color: #f0f0f0;
-    margin: 5px;
+.home {
+background-color: #48b2ff;
 }
+
+.btn {
+  border: 4px solid white;
+  background-color: transparent;
+  color: white;
+  padding: 10px 20px;
+  font-size: 28px;
+  font-color: white;
+  cursor: pointer;
+}
+
+.btn:hover {
+  border: 4px solid white;
+  background-color: transparent;
+  color: white;
+  padding: 10px 20px;
+  font-size: 28px;
+  font-weight: 'bold';
+  cursor: pointer;
+}
+
+
+
+svg { vertical-align: baseline; }

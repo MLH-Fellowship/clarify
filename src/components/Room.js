@@ -1,7 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import * as serviceWorker from '../serviceWorker';
-// import { NotificationContainer } from 'react-notifications';
+import { useParams } from 'react-router';
+import { Row } from 'antd';
 
 // Components
 import Questions from './Questions';
@@ -13,25 +12,27 @@ import 'react-notifications/lib/notifications.css';
 import 'antd/dist/antd.css';
 import '../styles/format.css';
 
-import { useParams } from "react-router";
+// Logo
+import logo from '../icons/diamond.png'
 
-function Room(props){
+function Room(props) {
     let { id } = useParams();
-        return(
+    return (
         <React.StrictMode>
-            
+            {/* <img src={logo} width='45px' height='45px' /> TODO: Put on same row */}
             <h1 style={{ padding: 25 }}>clarify</h1>
             <div id='flexbox'>
-            <div class='questions'>
-                <Questions roomId={id}/>
+                <div class='questions'>
+                    <h3> Questions </h3>
+                    <Questions roomId={id} />
+                </div>
+                <div class='poll'>
+                    <Poll roomId={id} />
+                </div>
             </div>
-            <div class='poll'>
-                <Poll roomId={id}/>
-            </div>
-            </div>
-    
+
         </React.StrictMode>
-        );
-    }
+    );
+}
 
 export default Room;

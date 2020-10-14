@@ -1,9 +1,10 @@
 import React from 'react';
-import { Form, Input, message } from 'antd';
-import { db, firebase } from '../services/firebase';
+import { Form, Input, message, Button } from 'antd';
+import { ArrowUpOutlined } from '@ant-design/icons'
+import { firebase, addQuestion } from '../services/firebase';
 
-const QuestionForm = ({ user }) => {
-  const { Search } = Input;
+const QuestionForm = ({ user, roomId }) => {
+  const [form] = Form.useForm();
 
   const success = () => {
     message.success({
@@ -14,32 +15,33 @@ const QuestionForm = ({ user }) => {
   // TODO: don't hardcode this
   const tempName = 'anonymous';
 
-  // onFinish uses the value from Search because Form returns an empty object due to being used as a wrapper
   const onFinish = values => {
-    if (typeof values === 'string') {
-      if (values !== '') {
-        const data = {
-          user: tempName,
-          question: values,
-          likes: 0,
-          created: firebase.firestore.Timestamp.fromDate(new Date())
-        };
-        db.collection('questions').add(data)
-          .then(() => {
-            success();
-          })
-          .catch(error => {
-            console.log('Addition of question failed');
-          });
-      }
+    if (values.questionBox.replace(/\s/g, '').length) {
+      const data = {
+        user: tempName,
+        question: values.questionBox,
+        likes: 0,
+        created: firebase.firestore.Timestamp.fromDate(new Date())
+      };
+      addQuestion(roomId, data, success);
     }
-  };
+    form.resetFields();
+  }
 
   return (
     <>
-      <Form onFinish={onFinish}>
+      <Form form={form} name="horizontal_login" layout="inline" onFinish={onFinish}>
+        <Form.Item name='questionBox'>
+          <Input placeholder="Ask a question..."
+            style={{
+              borderRadius: '5px',
+              backgroundColor: '#f0f0f0',
+              margin: '5px',
+              minWidth: '586px'
+            }} size={'medium'} bordered={false} />
+        </Form.Item>
         <Form.Item>
-          <Search placeholder="Write a question..." size='medium' onSearch={onFinish} bordered={false} enterButton='Ask' />
+          <Button type='primary' shape='circle' icon={<ArrowUpOutlined />} size={'medium'} htmlType='submit' />
         </Form.Item>
       </Form>
     </>

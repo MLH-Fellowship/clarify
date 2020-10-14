@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { db, increment, decrement } from '../services/firebase';
+import { db, enterPollVote } from '../services/firebase';
 
 // Components
 import SentimentButton from './SentimentButton';
 import BarChart2 from './BarChart2';
 import { Radio } from 'antd';
 
-function Poll(props) {
+function Poll({ roomId }) {
 
-  const collectionName = 'poll';
-  // const roomId = props.roomId;
+  // const collectionName = 'poll';
   const pollOptions = ['😳', '😕', '🙂', '😁']
   const defaultOption = pollOptions[2];
   const [data, setData] = useState([]);
@@ -17,36 +16,30 @@ function Poll(props) {
 
   // when user leaves, decrement the prev selection
   window.onbeforeunload = function () {
-    const prev = db.collection(collectionName).doc(active);
-    prev.update({ count: decrement });
+    enterPollVote(roomId, active, false);
   }
 
   useEffect(() => {
-    if (!db.collection(collectionName)) return;
-
     // When user signs on, increment the default selection
-    const target = db.collection(collectionName).doc(defaultOption);
-    target.update({ count: increment });
+    enterPollVote(roomId, defaultOption, true);
 
     // Listen for changes in votes and push to all clients
-    const unsubscribe = db.collection(collectionName).onSnapshot(function (snapshot) {
-      var result = [];
-      snapshot.forEach(function (doc) {
-        result.push({ name: doc.id, count: doc.data().count });
+    const unsubscribe = db.collection('rooms')
+      .doc(roomId)
+      .collection('poll')
+      .onSnapshot(function (snapshot) {
+        var result = [];
+        snapshot.forEach(function (doc) {
+          result.push({ name: doc.id, count: doc.data().count });
+        });
+        setData(result);
       });
-      setData(result);
-    });
     return unsubscribe;
   }, [defaultOption]);
 
   function onChange(e) {
-    // increment selection
-    const target = db.collection(collectionName).doc(e.target.value);
-    target.update({ count: increment });
-
-    // decrement previous selection
-    const prev = db.collection(collectionName).doc(active);
-    prev.update({ count: decrement });
+    enterPollVote(roomId, e.target.value, true); // add new vote
+    enterPollVote(roomId, active, false); // remove previous vote
     setActive(e.target.value);
   }
 
