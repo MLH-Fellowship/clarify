@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router';
-import { Tooltip } from 'antd';
+import { Tooltip, message } from 'antd';
 
 // Components
 import Questions from './Questions';
@@ -26,7 +26,13 @@ function Room(props) {
         dummy.select();
         document.execCommand("copy");
         document.body.removeChild(dummy);
-        return console.log(id);
+        const success = () => {
+            message.success({
+                content: 'Code copied'
+            });
+        };
+        success();
+
     }
 
 

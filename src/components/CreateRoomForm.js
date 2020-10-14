@@ -40,7 +40,7 @@ const CreateRoomForm = (props) => {
 
   return (
     <div>
-      <button id='createButton' className='btn' onClick={onClick} style={{ backgroundColor: '#00134d', color: '#ffffff', borderRadius: '15px' }}> Create a new room</button>
+      <button id='createButton' className='btn' onClick={onClick} style={{ color: '#ffffff', borderRadius: '15px' }}> Create a new room</button>
     </div>
   );
 

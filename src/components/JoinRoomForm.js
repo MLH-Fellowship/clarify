@@ -32,8 +32,8 @@ function JoinRoomForm(props) {
             borderRadius: '5px',
             backgroundColor: '#f0f0f0',
             margin: '5px',
-            minWidth: '586px'
-          }} size={'medium'} bordered={false} />
+            minWidth: '250px'
+          }} size={'large'} bordered={false} />
       </Form.Item>
     </Form>
   );

@@ -10,18 +10,20 @@ const { Header, Content } = Layout;
 function Home() {
   return (
     <Layout>
-      <Header id='title' style={{
-        backgroundColor: 'lightblue', height: '10vh', fontSize: '20px'
+      {/* <Header id='title' style={{
+        backgroundColor: '#48b2ff', height: '10vh', fontSize: '32px'
         , color: 'white', paddingLeft: '40px', verticalAlign: 'center'
-      }}>Clarify</Header>
-      <Content id='content' style={{ height: '90vh', backgroundColor: 'lightblue' }}>
-        <div></div>
+      }}>clarify</Header> */}
+      <Content id='content' style={{ height: '90vh', backgroundColor: '#48b2ff' }}>
+        <div>
+          <h1 style={{ padding: 25, fontFamily: 'sans-serif' }}>clarify</h1>
+        </div>
         <div className="create">
           <CreateRoomForm />
         </div>
 
         <div className="join">
-          <h5 style={{ color: "#00134d" }}>Enter an existing room code</h5>
+          <h5 style={{ color: "white" }}>OR enter an existing room code</h5>
           <JoinRoomForm />
         </div>
       </Content>
