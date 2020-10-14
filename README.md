@@ -4,8 +4,6 @@ Clarify is a tool for educators to make instruction more interactive for student
 
 ## Features
 
----
-
 ### Questions
 
 Students can ask specific questions during class using the text box. A list of the questions updates in realtime for everyone in the room. Additionally, students can upvote other student's questions if they have a similar one. The teacher can pull up the web app and see student questions in realtime and answer them live, after which they can resolve the question.
