@@ -41,6 +41,7 @@ class Questions extends React.Component {
     db.collection('questions')
       .onSnapshot(querySnapshot => {
         const data = querySnapshot.docs.map(function (doc) { return { ...doc.data(), id: doc.id } });
+        data.sort((a, b) => { return b.likes - a.likes });
         this.setState({ questions: data });
       });
   }
