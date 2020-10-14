@@ -1,21 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Comment, Tooltip, Avatar } from 'antd';
-import Avatars from '../images';
 import moment from 'moment';
 import { LikeOutlined, LikeFilled } from '@ant-design/icons';
 import { db, likeQuestion, resolveQuestion } from '../services/firebase';
 
-function randomInteger(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
 const QuestionCard = ({ questionId, roomId }) => {
   const [likes, setLikes] = useState();
   const [liked, setLiked] = useState(false);
-  const avatar = Avatars[randomInteger(0, 50)]; // Store avatar this in Questions.js
   const [user, setUser] = useState();
   const [text, setText] = useState();
   const [date, setDate] = useState();
+  const [avatar, setAvatar] = useState();
 
   // helper for date processing
   function toDateTime(secs) {
@@ -49,6 +44,7 @@ const QuestionCard = ({ questionId, roomId }) => {
       setLikes(doc.data().likes);
       setUser(doc.data().user);
       setText(doc.data().question);
+      setAvatar(doc.data().avatar);
 
       const dateObj = new Date(toDateTime(doc.data().created.seconds));
       setDate(timeAgo(dateObj));
