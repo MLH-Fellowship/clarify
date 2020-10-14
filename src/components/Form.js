@@ -18,7 +18,8 @@ auth.onAuthStateChanged(function (user) {
   // ...
 });
 
-class Form extends React.Component { // TODO: Change this to functional component not class component
+class Form extends React.Component {
+  // TODO: Change this to functional component not class component, get rid of state, just use Antdesign Input (no need to use form)
 
   constructor(props) {
     super(props);
