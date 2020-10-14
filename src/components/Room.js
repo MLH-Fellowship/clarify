@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router';
-import { Row } from 'antd';
+import { Tooltip } from 'antd';
 
 // Components
 import Questions from './Questions';
@@ -18,15 +18,31 @@ import logo from '../icons/diamond.png'
 
 function Room(props) {
     let { id } = useParams();
+
+    function onClick() {
+        var dummy = document.createElement("textarea");
+        document.body.appendChild(dummy);
+        dummy.value = id;
+        dummy.select();
+        document.execCommand("copy");
+        document.body.removeChild(dummy);
+        return console.log(id);
+    }
+
+
     return (
         <React.StrictMode>
             {/* <img src={logo} width='45px' height='45px' /> TODO: Put on same row */}
-            <h1 style={{ padding: 25, fontFamily:'sans-serif', fontSize: '80px', color: '#007bff'}}>clarify</h1>
+            <h1 style={{ padding: 25, fontFamily: 'sans-serif' }}>clarify</h1>
+
+            <Tooltip placement="top" title={'Click to copy'}>
+                <button className='joinCodeBadge' onClick={onClick}>Join Code: {id}</button>
+            </Tooltip>
             <div id='flexbox'>
                 <div class='questions'>
                     <h3> Questions </h3>
-                    <div class = 'questionDiv'>
-                        <Questions roomId={id}/>
+                    <div class='questionDiv'>
+                        <Questions roomId={id} />
                     </div>
                 </div>
                 <div class='poll'>
