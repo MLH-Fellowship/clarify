@@ -5,6 +5,7 @@ import { Row } from 'antd';
 // Components
 import Questions from './Questions';
 import Poll from './Poll';
+import QuestionForm from './QuestionForm';
 
 // Styles
 import 'bootstrap/dist/css/bootstrap.css';
@@ -24,13 +25,14 @@ function Room(props) {
             <div id='flexbox'>
                 <div class='questions'>
                     <h3> Questions </h3>
-                    <Questions roomId={id} />
+                    <div class = 'questionDiv'>
+                        <Questions roomId={id}/>
+                    </div>
                 </div>
                 <div class='poll'>
                     <Poll roomId={id} />
                 </div>
             </div>
-
         </React.StrictMode>
     );
 }

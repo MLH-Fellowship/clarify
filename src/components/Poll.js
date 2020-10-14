@@ -48,12 +48,9 @@ function Poll({ roomId }) {
   return (
     <>
       <BarChart2 data={data} labels={pollOptions} color={'#007bff'} />
-      <Radio.Group onChange={onChange} defaultValue={defaultOption} size='medium' style={{ margin: 30 }}>
+      <Radio.Group onChange={onChange} defaultValue={defaultOption} size='medium' style={{ width: '100%'}}>
         {buttons}
-      </Radio.Group>
-      {/*<Route path="/:id">
-          <Collection />
-  </Route> */}
+      </Radio.Group> 
     </>
   )
 }
