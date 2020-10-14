@@ -1,5 +1,25 @@
-.home {
+#content {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    margin: 50px;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    justify-content: center;
+
+}
+
+#title {
+    text-shadow: 1px 1px grey;
+}
+
+/* Button Code */
+#createButton {
+    color: white;
+    /* text-shadow: 1px 1px grey; */
+    outline: gray;
+}
+
+h5 {
+    color: white;
+}
+
+.join {
+    text-align: center;
 }
