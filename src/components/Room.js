@@ -13,23 +13,25 @@ import 'react-notifications/lib/notifications.css';
 import 'antd/dist/antd.css';
 import '../styles/format.css';
 
-export default class Room extends React.Component{
-    render() {
+import { useParams } from "react-router";
+
+function Room(props){
+    let { id } = useParams();
         return(
         <React.StrictMode>
             
             <h1 style={{ padding: 25 }}>clarify</h1>
             <div id='flexbox'>
             <div class='questions'>
-                <Questions />
+                <Questions roomId={id}/>
             </div>
             <div class='poll'>
-                <Poll />
+                <Poll roomId={id}/>
             </div>
             </div>
     
         </React.StrictMode>
         );
     }
-}
 
+export default Room;

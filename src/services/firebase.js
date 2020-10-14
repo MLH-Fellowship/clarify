@@ -18,8 +18,4 @@ const auth = firebaseApp.auth();
 const increment = firebase.firestore.FieldValue.increment(1);
 const decrement = firebase.firestore.FieldValue.increment(-1);
 
-<<<<<<< HEAD
-export { db, increment, decrement, firebase };
-=======
-export { db, auth, increment, decrement };
->>>>>>> d87e719... create multiple rooms
+export { db, auth, increment, decrement, firebase };
