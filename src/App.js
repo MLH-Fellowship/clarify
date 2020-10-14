@@ -6,7 +6,7 @@ import Home from "./components/Home"
 function App() {
 
    return (
-    <div className="App">
+    <div className="App" style={{backgroundColor: 'white', height: "100%"}}>
       <Router>
         <Switch>
           <Route path="/" exact component={() => <Home />} />

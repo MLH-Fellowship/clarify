@@ -37,7 +37,7 @@ const QuestionForm = ({ user, roomId }) => {
             style={{
               borderRadius: '5px',
               backgroundColor: '#f0f0f0',
-              minWidth: '635px'
+              minWidth: '630px'
             }} size={'medium'} bordered={false} />
         </Form.Item>
         </div>

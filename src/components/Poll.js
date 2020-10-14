@@ -47,11 +47,12 @@ function Poll({ roomId }) {
 
   return (
     <>
+    <div>
       <BarChart2 data={data} labels={pollOptions} color={'#007bff'} />
       <Radio.Group onChange={onChange} defaultValue={defaultOption} size='medium' style={{ width: '100%'}}>
         {buttons}
       </Radio.Group> 
-
+    </div>
     </>
   )
 }

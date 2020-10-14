@@ -22,7 +22,7 @@ function Room(props) {
         <React.StrictMode>
             {/* <img src={logo} width='45px' height='45px' /> TODO: Put on same row */}
             <h1 style={{ padding: 25, fontFamily:'sans-serif', fontSize: '80px', color: '#007bff'}}>clarify</h1>
-            <div id='flexbox'>
+            <div id='flexbox' style={{backgroundColor: "#e6f9ff"}}>
                 <div class='questions'>
                     <h3> Questions </h3>
                     <div class = 'questionDiv'>
