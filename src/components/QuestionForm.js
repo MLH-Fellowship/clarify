@@ -31,13 +31,13 @@ const QuestionForm = ({ user, roomId }) => {
   return (
     <>
       <Form form={form} name="horizontal_login" layout="inline" onFinish={onFinish}>
-        <div style={{marginTop: '10px'}}>
+        <div style={{marginTop: '10px', marginLeft: '5px'}}>
         <Form.Item name='questionBox'>
           <Input placeholder="Ask a question..."
             style={{
               borderRadius: '5px',
               backgroundColor: '#f0f0f0',
-              minWidth: '640px'
+              minWidth: '635px'
             }} size={'medium'} bordered={false} />
         </Form.Item>
         </div>
