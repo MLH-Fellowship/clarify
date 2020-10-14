@@ -14,11 +14,11 @@
     font-size: 130%;
 }
 
-.questions {
+/* .questions {
     border-right: 2px dotted black;  
     padding: 20px; 
     overflow: auto;
-}
+} */
 
 .questionDiv {
   display: grid;

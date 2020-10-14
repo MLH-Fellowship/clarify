@@ -1,16 +1,15 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Room from "./components/Room"
-import Home from "./components/Home"
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Room from './components/Room'
+import Home from './components/Home'
 
 function App() {
-
-   return (
-    <div className="App">
+  return (
+    <div className='App'>
       <Router>
         <Switch>
-          <Route path="/" exact component={() => <Home />} />
-          <Route path="/:id" children={<Room />} />
+          <Route path='/' exact component={() => <Home />} />
+          <Route path='/:id' children={<Room />} />
         </Switch>
       </Router>
     </div>
