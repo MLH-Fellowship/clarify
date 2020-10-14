@@ -96,6 +96,21 @@ background-color: #48b2ff;
   cursor: pointer;
 }
 
+.joinCodeBadge {
+    background-color: #f0f0f0; /* Changing background color */
+    font-weight: bold; /* Making font bold */
+    border-radius: 18px; /* Making border radius */
+    width: 180px; /* Making auto-sizable width */
+    height: 40px; /* Making auto-sizable height */
+    padding: 5px 20px 5px 20px; /* Making space around letters */
+    font-size: 14px; /* Changing font size */
+    position: absolute;
+    right: 50px;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    border:none;
+}
 
 
 svg { vertical-align: baseline; }

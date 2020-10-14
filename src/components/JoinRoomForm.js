@@ -30,10 +30,10 @@ function JoinRoomForm(props) {
         <Input placeholder="#"
           style={{
             borderRadius: '5px',
-            backgroundColor: '#f0f0f0',
+            backgroundColor: '#ffffff',
             margin: '5px',
-            minWidth: '586px'
-          }} size={'medium'} bordered={false} />
+            minWidth: '300px'
+          }} size={'large'} bordered={false} />
       </Form.Item>
     </Form>
   );
