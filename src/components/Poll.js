@@ -6,18 +6,10 @@ import SentimentButton from './SentimentButton';
 import BarChart2 from './BarChart2';
 import { Radio } from 'antd';
 
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { useParams } from "react-router";
-
-var collectionName = "poll";
-
-function Collection() {
-  let { id } = useParams();
-  collectionName = id;
-  return " ";
-}
-
 function Poll(props) {
+
+  const collectionName = 'poll';
+  // const roomId = props.roomId;
   const pollOptions = ['😳', '😕', '🙂', '😁']
   const defaultOption = pollOptions[2];
   const [data, setData] = useState([]);
