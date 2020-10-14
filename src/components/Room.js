@@ -39,7 +39,7 @@ function Room(props) {
     return (
         <React.StrictMode>
             {/* <img src={logo} width='45px' height='45px' /> TODO: Put on same row */}
-            <h1 style={{ padding: 25, fontFamily: 'sans-serif' }}>clarify</h1>
+            <h1 style={{ padding: 25, fontFamily: 'sans-serif', fontSize: '30px' }}>clarify</h1>
 
             <Tooltip placement="top" title={'Click to copy'}>
                 <button className='joinCodeBadge' onClick={onClick}>Join Code: {id}</button>

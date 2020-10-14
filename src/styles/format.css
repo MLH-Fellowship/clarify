@@ -1,7 +1,8 @@
 #flexbox {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    margin: 20px;
+    grid-template-columns: 3fr 2fr;
+    margin: 40px;
+    grid-gap: 40px;
     /* border: 10px solid yellow; */
 }
 
@@ -23,7 +24,7 @@
 .questionDiv {
   display: grid;
   /* border: 2px solid blue; */
-  height: 50vh;
+  height: 63vh;
   align-self: end;
 }
 
@@ -46,7 +47,8 @@
     /* border: 2px solid green; */
     text-align: center;
     align-self: end;
-    padding: 20px;
+    margin-left: 5px;
+    margin-right: 20px;
 }
 
 canvas {
