@@ -18,8 +18,8 @@ export default class Home extends React.Component {
 
     return (
       <Layout>
-        <Header id = 'title' style={{backgroundColor: 'lightblue', height:'10vh', fontFamily: 'sans-serif', fontSize:'20px'
-                        , color: '#00134d', paddingLeft: '40px', verticalAlign:'center'}}>Clarify</Header>
+        <Header id = 'title' style={{backgroundColor: 'lightblue', height:'15vh', paddingLeft: '40px', verticalAlign:'center'}}>
+        <h1 style={{ fontFamily:'sans-serif', fontSize: '80px', color: '#ffffff'}}>clarify</h1></Header>
         <Content id = 'content' style={{height: '90vh', backgroundColor: 'lightblue'}}>
               <div></div>
               <div className="create">
