@@ -3,11 +3,21 @@ import React from 'react';
 import { NotificationManager } from 'react-notifications';
 import { db } from '../services/firebase';
 import Button from 'react-bootstrap/Button';
-import '../styles/Questions.css';
+import '../styles/Questions.css'
 
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { useParams } from "react-router";
+
+var collectionName = "questions";
+
+function Collection() {
+  let { id } = useParams();
+  collectionName = id;
+  return " ";
+}
 
 class Questions extends React.Component {
-
+  
   constructor(props, state) {
     super();
     this.state = {
@@ -39,7 +49,7 @@ class Questions extends React.Component {
       uid: this.state.formValues.question
     };
     console.log(data);
-    db.collection('questions')
+    db.collection(collectionName)
       .doc(data.uid.toString())
       .set(data)
       .then(() => {
@@ -104,7 +114,8 @@ class Questions extends React.Component {
   };
 
   getLatestSnapshot() {
-    db.collection('questions')
+    // collectionName = Collection();
+    db.collection(collectionName)
       .onSnapshot(querySnapshot => {
         const data = querySnapshot.docs.map(doc => doc.data());
         console.log(data);
@@ -113,7 +124,7 @@ class Questions extends React.Component {
   }
 
   handleClick(question) {
-    db.collection('questions').doc(question).delete().then(() => {
+    db.collection(collectionName).doc(question).delete().then(() => {
       console.log('Document successfully deleted!');
       this.getLatestSnapshot();
     }).catch(function (error) {
@@ -208,6 +219,9 @@ class Questions extends React.Component {
             </div></span> : null}
           </div>
         </div>
+        <Route path="/:id">
+          <Collection />
+        </Route>
       </>
     );
   }
