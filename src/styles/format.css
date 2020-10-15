@@ -98,10 +98,6 @@ background-color: #48b2ff;
 #createButton:active {
   background-color: #3b9fe7;
 }
-/* 
-#createButton:hover, #createButton:active {
-  outline: none;
-} */
 
 .joinCodeBadge {
     background-color: #f0f0f0; /* Changing background color */

@@ -10,7 +10,7 @@ const { Header, Content } = Layout;
 function Home() {
   return (
     <Layout>
-      
+
       <Header id='title' style={{
         backgroundColor: '#48b2ff', height: '10vh', fontSize: '32px'
         , color: 'white', paddingLeft: '40px', verticalAlign: 'center'
@@ -22,7 +22,7 @@ function Home() {
         </div>
 
         <div className="join">
-          <h5 style={{ color: "white" }}>OR enter an existing room code</h5>
+          <h5 style={{ color: "white" }}>or enter an existing room code</h5>
           <JoinRoomForm />
         </div>
       </Content>
