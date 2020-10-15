@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { db, enterPollVote } from '../services/firebase';
+import { db, enterPollVote, voteCountGreaterThanZero } from '../services/firebase';
 
 // Components
 import SentimentButton from './SentimentButton';
@@ -39,11 +39,15 @@ function Poll({ roomId }) {
 
   function onChange(e) {
     enterPollVote(roomId, e.target.value, true); // add new vote
-    enterPollVote(roomId, active, false); // remove previous vote
+
+    if (voteCountGreaterThanZero(roomId, active)) {
+      enterPollVote(roomId, active, false)
+    }; // remove previous vote
+
     setActive(e.target.value);
   }
 
-  const buttons = pollOptions.map((option) => <SentimentButton text={option} color={option === active ? '#007bff' : '#1890ff'} />)
+  const buttons = pollOptions.map((option) => <SentimentButton text={option} color={option === active ? '#007bff' : '#f0f0f0'} />)
 
   return (
     <>

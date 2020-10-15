@@ -38,7 +38,7 @@ const createRoom = (roomId, success) => {
       .set({ count: 0 }));
 }
 
-// Core actions
+////////////////// Core actions
 
 const enterPollVote = (roomId, option, action) => {
   // action: {true, false} for increase and decrease
@@ -116,6 +116,18 @@ const resolveQuestion = (roomId, questionId) => {
     });
 }
 
+////////////////// Core actions
+
+const voteCountGreaterThanZero = (roomId, option) => {
+  const prev = db.collection('rooms')
+    .doc(roomId)
+    .collection('poll')
+    .doc(option)
+    .count;
+  console.log(prev);
+  return prev > 0 ? true : false;
+}
+
 export {
   db,
   auth,
@@ -128,5 +140,6 @@ export {
   resolveQuestion,
   likeQuestion,
   enterPollVote,
-  createRoom
+  createRoom,
+  voteCountGreaterThanZero
 };

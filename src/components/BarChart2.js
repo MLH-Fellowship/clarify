@@ -99,7 +99,7 @@ class BarChart2 extends React.Component {
             ticks: {
               display: false, // axis labels
               beginAtZero: true,
-              suggestedMax: 50
+              suggestedMax: 25
             }
           }]
         }

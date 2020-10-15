@@ -46,13 +46,9 @@ function Room(props) {
             </Tooltip>
             <div id='flexbox'>
                 <div class='questions'>
-                    <h3> Questions </h3>
+                    <h3> Question Board </h3>
                     <div class='questionDiv'>
-                        <Questions roomId={id} style={{
-                            position: 'absolute',
-                            left: '100px',
-                            display: 'flex',
-                        }} />
+                        <Questions roomId={id} />
                     </div>
                 </div>
                 <div class='poll'>
