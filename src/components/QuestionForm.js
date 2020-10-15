@@ -19,12 +19,6 @@ const QuestionForm = ({ user, roomId }) => {
     }
   });
 
-  const success = () => {
-    message.success({
-      content: 'Question added'
-    });
-  };
-
   // TODO: don't hardcode this
   const tempName = 'anonymous';
 
@@ -39,29 +33,31 @@ const QuestionForm = ({ user, roomId }) => {
         created: firebase.firestore.Timestamp.fromDate(new Date()),
         avatar: avatar
       };
-      addQuestion(roomId, data, success);
+      addQuestion(roomId, data, () => {
+        message.success('Question added');
+      });
     }
     form.resetFields();
   }
 
   return (
     <>
-      <Form id = 'questionForm' form={form} name="horizontal_login" layout="inline" onFinish={onFinish}>
-        <div style={{marginTop: '10px', marginLeft: '5px'}}>
-        <Form.Item name='questionBox'>
-          <Input placeholder="Ask a question..."
-            style={{
-              borderRadius: '5px',
-              backgroundColor: '#f0f0f0'
-            }} size={'medium'} bordered={false} />
-        </Form.Item>
+      <Form id='questionForm' form={form} name="horizontal_login" layout="inline" onFinish={onFinish}>
+        <div style={{ marginTop: '10px', marginLeft: '5px' }}>
+          <Form.Item name='questionBox'>
+            <Input placeholder="Ask a question..."
+              style={{
+                borderRadius: '5px',
+                backgroundColor: '#f0f0f0'
+              }} size={'medium'} bordered={false} />
+          </Form.Item>
         </div>
-        <div style={{marginTop: '10px'}}>
-        <Form.Item>
-          <Button type='primary' shape='circle' icon={<ArrowUpOutlined />} size={'medium'} htmlType='submit' />
-        </Form.Item>
+        <div style={{ marginTop: '10px' }}>
+          <Form.Item>
+            <Button type='primary' shape='circle' icon={<ArrowUpOutlined />} size={'medium'} htmlType='submit' />
+          </Form.Item>
         </div>
-        
+
       </Form>
     </>
   )

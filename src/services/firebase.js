@@ -118,13 +118,13 @@ const addQuestion = (roomId, data, success) => {
 }
 
 // Delete question with success feedback
-const resolveQuestion = (roomId, questionId) => {
+const resolveQuestion = (roomId, questionId, success) => {
   db.collection('rooms').doc(roomId)
     .collection('questions')
     .doc(questionId)
     .delete()
     .then(() => {
-      console.log(questionId, 'successfully resolved');
+      success();
     })
     .catch(function (error) {
       console.error('Error removing question: ', error);

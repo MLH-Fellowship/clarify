@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Comment, Tooltip, Avatar } from 'antd';
+import { message, Comment, Tooltip, Avatar } from 'antd';
 import moment from 'moment';
 import { LikeOutlined, LikeFilled } from '@ant-design/icons';
 import { db, likeQuestion, resolveQuestion } from '../services/firebase';
@@ -64,7 +64,9 @@ const QuestionCard = ({ questionId, roomId }) => {
   }, [questionId, roomId]);
 
   function resolve() {
-    resolveQuestion(roomId, questionId);
+    resolveQuestion(roomId, questionId, () => {
+      message.info('Question resolved');
+    });
   };
 
   const like = () => {
