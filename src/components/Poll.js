@@ -38,12 +38,8 @@ function Poll({ roomId }) {
   }, [defaultOption]);
 
   function onChange(e) {
-    enterPollVote(roomId, e.target.value, true); // add new vote
-
-    if (voteCountGreaterThanZero(roomId, active)) {
-      enterPollVote(roomId, active, false)
-    }; // remove previous vote
-
+    // console.log(active);
+    enterPollVote(roomId, e.target.value, true, active); // add new vote
     setActive(e.target.value);
   }
 

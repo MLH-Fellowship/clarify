@@ -40,13 +40,28 @@ const createRoom = (roomId, success) => {
 
 ////////////////// Core actions
 
-const enterPollVote = (roomId, option, action) => {
+const enterPollVote = (roomId, option, action, prevOption) => {
   // action: {true, false} for increase and decrease
-  const docRef = db.collection('rooms')
+  const optionRef = db.collection('rooms')
     .doc(roomId)
     .collection('poll')
     .doc(option);
-  action ? docRef.update({ count: increment }) : docRef.update({ count: decrement });
+
+  // update vote count
+  action ? optionRef.update({ count: increment }) : optionRef.update({ count: decrement });
+
+  // if prevOption is provided, decrement it
+  if (prevOption) {
+    const prev = db.collection('rooms')
+      .doc(roomId)
+      .collection('poll')
+      .doc(prevOption);
+    prev.get().then(function (doc) {
+      if (doc.data().count > 0) {
+        prev.update({ count: decrement });
+      }
+    });
+  }
 }
 
 const likeQuestion = (roomId, questionId, action) => {
@@ -116,17 +131,6 @@ const resolveQuestion = (roomId, questionId) => {
     });
 }
 
-////////////////// Core actions
-
-const voteCountGreaterThanZero = (roomId, option) => {
-  const prev = db.collection('rooms')
-    .doc(roomId)
-    .collection('poll')
-    .doc(option)
-    .count;
-  console.log(prev);
-  return prev > 0 ? true : false;
-}
 
 export {
   db,
@@ -140,6 +144,5 @@ export {
   resolveQuestion,
   likeQuestion,
   enterPollVote,
-  createRoom,
-  voteCountGreaterThanZero
+  createRoom
 };
