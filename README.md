@@ -1,12 +1,15 @@
 # Clarify
 
-Clarify is a tool for educators to make instruction more interactive for students. Teachers can create 'rooms' where students can in realtime ask questions and provide feedback regarding their understanding of the class.
+Clarify is a tool for educators to make instruction more interactive for students. Instructor can create rooms where students can ask questions in realtime and provide feedback to the instructor regarding their understanding of the class.
+
+
+![](Room.png)
 
 ## Features
 
 ### Questions
 
-Students can ask specific questions during class using the text box. A list of the questions updates in realtime for everyone in the room. Additionally, students can upvote other student's questions if they have a similar one. The teacher can pull up the web app and see student questions in realtime and answer them live, after which they can resolve the question.
+Students can ask specific questions during class using the question submission. A list of the questions updates in realtime for everyone in the room. Additionally, students can upvote other student's questions if they have a similar one. The teacher can pull up the web app and see student questions in realtime and answer them live, after which they can resolve the question.
 
 
 ### Poll
