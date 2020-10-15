@@ -1,6 +1,6 @@
 import React from 'react';
 import '../styles/home.css'
-import { db, auth, checkRoomExists } from '../services/firebase'
+import { db, auth } from '../services/firebase'
 
 import { message, Form, Input } from 'antd';
 
@@ -22,35 +22,35 @@ function JoinRoomForm(props) {
   //   return checkRoomExists(value);
   // }
 
-  const validateRoomCode = (_, value) => {
-    // var docRef = db.collection('rooms').doc(value);
+  // const validateRoomCode = (_, value) => {
+  //   // var docRef = db.collection('rooms').doc(value);
 
-    db.collection('rooms').doc(value).get().then(function (doc) {
-      if (doc.exists) {
-        return Promise.resolve();
-      } else {
-        return Promise.reject('Invalid room code');
-      }
-    }).catch(function (error) {
-      return Promise.reject(error);
-    });
+  //   db.collection('rooms').doc(value).get().then(function (doc) {
+  //     if (doc.exists) {
+  //       return Promise.resolve();
+  //     } else {
+  //       return Promise.reject('Invalid room code');
+  //     }
+  //   }).catch(function (error) {
+  //     return Promise.reject(error);
+  //   });
 
-    // if (value > 0) {
-    //   return Promise.resolve();
-    // }
+  //   // if (value > 0) {
+  //   //   return Promise.resolve();
+  //   // }
 
-    // return Promise.reject('Price must be greater than zero!');
-  };
+  //   // return Promise.reject('Price must be greater than zero!');
+  // };
 
   return (
     <Form form={form} name='horizontal_login' layout='inline' onFinish={onFinish} validateTrigger='onSubmit'>
       <Form.Item name='questionBox'
 
-        rules={[
-          {
-            validator: validateRoomCode,
-          }
-        ]}
+      //   rules={[
+      //     {
+      //       validator: validateRoomCode,
+      //     }
+      //   ]}
       // validateStatus='validating' hasFeedback 
       >
         <Input placeholder='#'

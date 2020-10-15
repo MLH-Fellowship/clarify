@@ -1,9 +1,7 @@
-import React from "react";
-import "../styles/home.css";
-import Form from "./Form";
+import React from 'react';
 import { Layout } from 'antd';
 
-import CreateRoomForm from "./CreateRoomForm";
+import CreateRoomForm from './CreateRoomForm';
 import JoinRoomForm from './JoinRoomForm';
 const { Header, Content } = Layout;
 
@@ -17,12 +15,12 @@ function Home() {
       }}> clarify </Header>
       <Content id='content' style={{ height: '90vh', backgroundColor: '#48b2ff' }}>
         <div></div>
-        <div className="create">
+        <div className='create'>
           <CreateRoomForm />
         </div>
 
-        <div className="join">
-          <h5 style={{ color: "white" }}>or enter an existing room code</h5>
+        <div className='join'>
+          <h5 style={{ color: 'white' }}>or enter an existing room code</h5>
           <JoinRoomForm />
         </div>
       </Content>

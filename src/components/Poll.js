@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { db, enterPollVote, voteCountGreaterThanZero } from '../services/firebase';
+import { db, enterPollVote } from '../services/firebase';
 
 // Components
 import SentimentButton from './SentimentButton';
 import BarChart2 from './BarChart2';
-import { Radio, Row } from 'antd';
+import { Radio } from 'antd';
 
 function Poll({ roomId }) {
 
@@ -35,7 +35,7 @@ function Poll({ roomId }) {
         setData(result);
       });
     return unsubscribe;
-  }, [defaultOption]);
+  }, [defaultOption, roomId]);
 
   function onChange(e) {
     // console.log(active);

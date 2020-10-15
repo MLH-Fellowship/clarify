@@ -5,7 +5,6 @@ import { Tooltip, message } from 'antd';
 // Components
 import Questions from './Questions';
 import Poll from './Poll';
-import QuestionForm from './QuestionForm';
 
 // Styles
 import 'bootstrap/dist/css/bootstrap.css';
@@ -14,7 +13,7 @@ import 'antd/dist/antd.css';
 import '../styles/format.css';
 
 // Logo
-import logo from '../icons/diamond.png'
+// import logo from '../icons/diamond.png'
 
 function Room(props) {
     let { id } = useParams();
