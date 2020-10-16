@@ -33,7 +33,7 @@ Feature requests are welcome and we are excited to keep making improvements!
 ## Technologies Used
 - React
 - Firebase
+- [Ant Design](https://ant.design/) component library
 
 ## Acknowledgments
-- [Ant Design](https://ant.design/) component library
 - [Iconscout](https://iconscout.com/categories/avatars/icons) for icons
