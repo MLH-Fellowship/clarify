@@ -1,5 +1,6 @@
 import * as firebase from 'firebase';
 import 'firebase/firestore';
+import { message } from 'antd';
 
 const firebaseApp = firebase.initializeApp({
   apiKey: 'AIzaSyCXZ3IgNwq1vczQYOoL_c0cph91RXxnKTw',
@@ -16,6 +17,29 @@ const db = firebaseApp.firestore();
 const auth = firebaseApp.auth();
 const increment = firebase.firestore.FieldValue.increment(1);
 const decrement = firebase.firestore.FieldValue.increment(-1);
+
+
+////////////////// App actions
+
+const validateRoomKey = (e, props) => {
+  // Room code entered
+  let value = e.target.value;
+
+  db.collection('rooms').get().then(function (querySnapshot) {
+    let rooms = querySnapshot.docs.map((doc) => { return doc.id });
+    if (!rooms.includes(value)) {
+      message.error('Room code is invalid');
+    }
+    else {
+      auth.signInAnonymously();
+      message.success('Entered room');
+
+      return props.history.push(`${value}`);
+    }
+  })
+}
+
+////////////////// Core actions
 
 const createRoom = (roomId, success) => {
   const pollOptions = ['😳', '😕', '🙂', '😁'];
@@ -37,8 +61,6 @@ const createRoom = (roomId, success) => {
       .doc(pollOption)
       .set({ count: 0 }));
 }
-
-////////////////// Core actions
 
 const enterPollVote = (roomId, option, action, prevOption) => {
   // action: {true, false} for increase and decrease
@@ -144,5 +166,6 @@ export {
   resolveQuestion,
   likeQuestion,
   enterPollVote,
-  createRoom
+  createRoom,
+  validateRoomKey
 };
