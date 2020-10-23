@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { Tooltip, message } from 'antd';
+import { getRoom } from '../services/firebase'
 
 // Components
 import Questions from './Questions';
@@ -17,14 +18,23 @@ import '../styles/format.css';
 import logo from '../icons/clarifylogoblue.png'
 
 function Room(props) {
+    const [room, setRoom] = useState();
     let { id } = useParams();
 
+    useEffect(() => {
+        async function getRoomName() {
+            var room = await getRoom(id);
+            setRoom(room);
+        }
+        getRoomName();
+    }, []);
+
     function onClick() {
-        var dummy = document.createElement("textarea");
+        var dummy = document.createElement('textarea');
         document.body.appendChild(dummy);
         dummy.value = id;
         dummy.select();
-        document.execCommand("copy");
+        document.execCommand('copy');
         document.body.removeChild(dummy);
         const success = () => {
             message.success({
@@ -32,7 +42,6 @@ function Room(props) {
             });
         };
         success();
-
     }
 
     return (
@@ -43,12 +52,12 @@ function Room(props) {
                     <span id='clarify-title'>Clarify</span>
                 </Link>
             </div>
-            <Tooltip placement="top" title={'Click to copy'}>
+            <Tooltip placement='top' title={'Click to copy'}>
                 <button className='joinCodeBadge' onClick={onClick}>Join Code: {id}</button>
             </Tooltip>
-            <div style={{ paddingLeft: 40, paddingTop: 40, fontSize: '18px' }}>My Room</div>
+            <div style={{ paddingLeft: 40, paddingTop: 40, fontSize: '18px' }}>{room ? room.roomName : <Redirect to='/' />}</div>
 
-            <div className="flex-container">
+            <div className='flex-container'>
                 <div className='row'>
                     <div className='column-q'>
                         <p style={{ fontWeight: 'bold' }}>Question Board</p>

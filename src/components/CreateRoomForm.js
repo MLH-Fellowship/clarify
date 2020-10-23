@@ -29,16 +29,8 @@ const CreateRoomForm = (props) => {
 
 
   async function onClick() {
-    // Generate unique ID
-    var roomId = generate();
-
-    // Regenerate id if room exists already
-    if (await getRoom(roomId)) {
-      roomId = generate();
-    }
-
-    createRoom(roomId);
-    success(roomId);
+    var roomId = await createRoom(generate, success);
+    console.log(roomId);
     return props.history.push(`${roomId}`) // <--- The page you want to redirect your user to.
   }
 

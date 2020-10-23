@@ -39,39 +39,51 @@ const validateRoomKey = (e, props) => {
   })
 }
 
-// Get room by id; returns undefined if id does not exist * Use function with async/await *
-const getRoom = id => {
-  return new Promise((resolve, reject) => {
-    db.collection('rooms').doc(id).get().then(function (doc) {
-      return resolve(doc.data());
-    }).catch(function (error) {
-      console.log('Error getting document:', error);
-      return reject('Error getting document');
-    });
+// Get room by id; returns undefined if id does not exist * Use async function with async/await *
+const getRoom = async id => {
+  const docRef = db.collection('rooms').doc(id);
+
+  try {
+    const doc = await docRef.get();
+    return doc.data();
   }
-  )
+  catch (err) {
+    console.log('Error getting document:', err);
+  }
 };
 
-// Add a new poll collection with options initialized and count: 0
-const createRoom = (roomId, success) => {
+// Add a new poll collection with options initialized and count: 0 * Use async function with async/await *
+const createRoom = async (generate, success) => {
+
+  // Generate unique ID
+  var roomId = 'VCkJj';
+
+  // Regenerate id if room exists already
+  if (await getRoom(roomId)) {
+    roomId = generate();
+  }
+
   const pollOptions = ['😳', '😕', '🙂', '😁'];
 
-  db.collection('rooms')
-    .doc(roomId)
-    .set({ roomName: 'My Room Name' })
-    .then(function () {
-      if (success) {
-        success();
-      }
-    });
+  return new Promise((resolve) => {
 
-  // Add a new poll collection initialized the options and count: 0
-  pollOptions.map((pollOption) =>
+
     db.collection('rooms')
       .doc(roomId)
-      .collection('poll')
-      .doc(pollOption)
-      .set({ count: 0 }));
+      .set({ roomName: 'My Room' })
+      .then(function () {
+        success(roomId);
+        resolve(roomId);
+      });
+
+    // Add a new poll collection initialized the options and count: 0
+    pollOptions.map((pollOption) =>
+      db.collection('rooms')
+        .doc(roomId)
+        .collection('poll')
+        .doc(pollOption)
+        .set({ count: 0 }));
+  })
 }
 
 ////////////////// Core actions
