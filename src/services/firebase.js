@@ -39,8 +39,20 @@ const validateRoomKey = (e, props) => {
   })
 }
 
-////////////////// Core actions
+// Get room by id; returns undefined if id does not exist * Use function with async/await *
+const getRoom = id => {
+  return new Promise((resolve, reject) => {
+    db.collection('rooms').doc(id).get().then(function (doc) {
+      return resolve(doc.data());
+    }).catch(function (error) {
+      console.log('Error getting document:', error);
+      return reject('Error getting document');
+    });
+  }
+  )
+};
 
+// Add a new poll collection with options initialized and count: 0
 const createRoom = (roomId, success) => {
   const pollOptions = ['😳', '😕', '🙂', '😁'];
 
@@ -61,6 +73,8 @@ const createRoom = (roomId, success) => {
       .doc(pollOption)
       .set({ count: 0 }));
 }
+
+////////////////// Core actions
 
 const enterPollVote = (roomId, option, action, prevOption) => {
   // action: {true, false} for increase and decrease
@@ -167,5 +181,6 @@ export {
   likeQuestion,
   enterPollVote,
   createRoom,
-  validateRoomKey
+  validateRoomKey,
+  getRoom
 };

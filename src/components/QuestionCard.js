@@ -49,7 +49,7 @@ const QuestionCard = ({ questionId, roomId }) => {
       const dateObj = new Date(toDateTime(doc.data().created.seconds));
       setDate(timeAgo(dateObj));
     }).catch(function (error) {
-      console.log("Error getting document:", error);
+      console.log('Error getting document:', error);
     });
 
     // Listen for changes in votes and push to all clients
@@ -79,15 +79,15 @@ const QuestionCard = ({ questionId, roomId }) => {
   };
 
   const actions = [
-    <Tooltip key="comment-basic-like" title={!liked ? 'Like' : 'Unlike'}>
+    <Tooltip key='comment-basic-like' title={!liked ? 'Like' : 'Unlike'}>
       <span onClick={like}>
         {!liked ? <LikeOutlined /> : <LikeFilled />}
-        <span className="comment-action">{likes}</span>
+        <span className='comment-action'>{likes}</span>
       </span>
     </Tooltip>,
 
-    <Tooltip key="comment-basic-resolve" title="Remove question">
-      <span onClick={resolve} key="comment-basic-resolve-">Resolve</span>
+    <Tooltip key='comment-basic-resolve' title='Remove question'>
+      <span onClick={resolve} key='comment-basic-resolve-'>Resolve</span>
     </Tooltip>
   ];
 
@@ -99,7 +99,7 @@ const QuestionCard = ({ questionId, roomId }) => {
         avatar={
           <Avatar
             src={avatar}
-            alt="Avatar icon"
+            alt='Avatar icon'
           />
         }
         content={

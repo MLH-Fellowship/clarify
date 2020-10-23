@@ -35,7 +35,6 @@ function Room(props) {
 
     }
 
-
     return (
         <React.StrictMode>
             <div className='site-header'>
@@ -49,13 +48,13 @@ function Room(props) {
             </Tooltip>
             <div style={{ paddingLeft: 40, paddingTop: 40, fontSize: '18px' }}>My Room</div>
 
-            <div class="flex-container">
-                <div class='row'>
-                    <div class='column-q'>
+            <div className="flex-container">
+                <div className='row'>
+                    <div className='column-q'>
                         <p style={{ fontWeight: 'bold' }}>Question Board</p>
                         <Questions roomId={id} />
                     </div>
-                    <div class='column-p'>
+                    <div className='column-p'>
                         <p style={{ fontWeight: 'bold' }}>Class Sentiment</p>
                         <Poll roomId={id} />
                     </div>

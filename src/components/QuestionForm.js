@@ -13,6 +13,7 @@ const QuestionForm = ({ user, roomId }) => {
     if (user) {
       var seedrandom = require('seedrandom');
       var rng = seedrandom(user.uid);
+      console.log(user.uid);
       var i = Math.floor(rng() * 49);
       setIndex(i);
       avatar = Avatars[avatarIndex];

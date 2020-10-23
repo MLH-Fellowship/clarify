@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { db, enterPollVote } from '../services/firebase';
+import { useHistory, withRouter } from 'react-router-dom';
 
 // Components
 import SentimentButton from './SentimentButton';
@@ -9,12 +10,26 @@ import { Radio } from 'antd';
 function Poll({ roomId }) {
 
   // const collectionName = 'poll';
-  const pollOptions = ['😳', '😕', '🙂', '😁']
+  const pollOptions = ['😳', '😕', '🙂', '😁'];
   const defaultOption = pollOptions[2];
   const [data, setData] = useState([]);
   const [active, setActive] = useState(defaultOption);
 
-  // when user leaves, decrement the prev selection
+
+  let history = useHistory();
+
+  // when user navigates using React router, decrement the prev selection
+  // TODO: click on logo isn't detected yet
+  useEffect(() => {
+    return () => {
+      if (history.action === "POP") {
+        console.log('back button');
+        enterPollVote(roomId, active, false);
+      }
+    };
+  }, [history]);
+
+  // when user refreshes/closes/navigates away, decrement the prev selection
   window.onbeforeunload = function () {
     enterPollVote(roomId, active, false);
   }
@@ -34,11 +49,25 @@ function Poll({ roomId }) {
         });
         setData(result);
       });
+
     return unsubscribe;
   }, [defaultOption, roomId]);
 
   function onChange(e) {
-    // console.log(active);
+    // let result = [];
+    // for (let item of data) {
+    //   if (item.name === e.target.value) {
+    //     result.push({ 'name': item.name, 'count': item.count + 1 });
+    //   }
+    //   else if (item.name === active) {
+    //     result.push({ 'name': item.name, 'count': item.count - 1 });
+    //   }
+    //   else {
+    //     result.push(item);
+    //   }
+    // }
+    // console.log(result);
+    // setData(result);
     enterPollVote(roomId, e.target.value, true, active); // add new vote
     setActive(e.target.value);
   }
@@ -47,6 +76,7 @@ function Poll({ roomId }) {
 
   return (
     <>
+
       <div className='poll' >
         <BarChart2 data={data} labels={pollOptions} color={'#5285fb'} />
         <Radio.Group onChange={onChange} defaultValue={defaultOption} size='large' style={{ width: '100%' }}>

@@ -4,7 +4,7 @@ import { db } from '../services/firebase';
 // Components
 import QuestionCard from './QuestionCard';
 import QuestionForm from './QuestionForm';
-import { LoadingOutlined } from '@ant-design/icons';
+import { LoadingOutlined, SmileOutlined } from '@ant-design/icons';
 import { Spin } from 'antd';
 
 class Questions extends React.Component {
@@ -48,8 +48,9 @@ class Questions extends React.Component {
               : questions.length > 0
                 ? allQuestions
                 : <div className='question-container-empty'>
-                  <div style={{ fontSize: 24, color: '#e1e3ec' }}>Ask the first question</div>
-                  <div style={{ fontSize: 14, color: '#e1e3ec' }}>Submit using the box below</div>
+                  <div style={{ fontSize: 36, color: '#d7d7da' }}><SmileOutlined /></div>
+                  <div style={{ fontSize: 24, color: '#d7d7da' }}>No questions yet</div>
+                  <div style={{ fontSize: 16, color: '#d7d7da' }}>Ask a question below</div>
                 </div>
           }
         </div>

@@ -140,11 +140,9 @@ body {
   border: 1px solid white;
 }
 
-.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
-  border-color:var(--light-primary-color);
-}
-
-.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled):hover {
+.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled),
+.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled):hover,
+.ant-radio-button-wrapper-checked:not([class*=' ant-radio-button-wrapper-disabled']).ant-radio-button-wrapper:first-child {
   border-color:var(--light-primary-color);
 }
 
@@ -152,38 +150,19 @@ body {
   box-shadow:none;
 }
 
-.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled)::before {
-  background-color:var(--light-primary-color);
-}
-
-.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled)::after {
-  background-color:var(--light-primary-color);
-}
-
-.ant-radio-button-wrapper-checked:not([class*=' ant-radio-button-wrapper-disabled']).ant-radio-button-wrapper:first-child {
-  border-color:var(--light-primary-color);
-}
-
-.ant-radio-button-wrapper:not(:first-child)::before {
-  background-color:var(--light-background-color);
-}
-
-.ant-radio-button-wrapper:not(:first-child)::before {
+.ant-radio-button-wrapper:not(:first-child)::before,
+.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled):hover::before  {
   background-color:var(--light-background-color);
 }
 
 .ant-radio-button-wrapper:first-child{
-  background-color:none;
-  border-radius:5px 0 0 5px;
+  border-radius:18px 0 0 18px;
   border-left: 1px solid white;
 }
 
 .ant-radio-button-wrapper:last-child{
-  border-radius:0 5px 5px 0;
-}
-
-.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled):hover::before {
-  background-color:white;
+  border-radius:0 18px 18px 0;
+  border-right: 1px solid white;
 }
 
 #questionForm{
@@ -216,12 +195,12 @@ body {
 }
 
 #question-form-input {
-  border-radius: '5px';
-  background-color: white;
+  border-radius: 14px;
+  background-color: #e2e5ec;
 }
 
 #question-form-input:focus{
-  box-shadow: 0 0 5px #dee8fd;
+  /* box-shadow: 0 0 5px #dee8fd; */
 }
 
 #createButton {
@@ -277,7 +256,7 @@ body {
 } */
 
 .joinCodeBadge, .joinCodeBadge:focus {
-    background-color: #e1e3ec; /* Changing background color */
+    background-color: #e2e5ec; /* Changing background color */
     font-weight: bold; /* Making font bold */
     border-radius: 18px; /* Making border radius */
     width: 140px; /* Making auto-sizable width */

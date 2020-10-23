@@ -53,6 +53,7 @@ class BarChart2 extends React.Component {
             data: data,
             backgroundColor: color,
             borderWidth: 0,
+            barPercentage: 0.8
           }
         ]
       },
@@ -92,7 +93,6 @@ class BarChart2 extends React.Component {
         },
         scales: {
           xAxes: [{
-            barPercentage: 0.8,
             gridLines: {
               display: false // vertical lines
             },
@@ -122,7 +122,7 @@ class BarChart2 extends React.Component {
   render() {
     return (
       <>
-        <div class='chart-container'>
+        <div className='chart-container'>
           <canvas id='myChart' ref={this.chartRef} />
         </div>
       </>
