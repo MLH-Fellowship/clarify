@@ -1,5 +1,4 @@
 import React from 'react';
-import { Layout } from 'antd';
 
 import CreateRoomForm from './CreateRoomForm';
 import JoinRoomForm from './JoinRoomForm';
@@ -7,14 +6,12 @@ import JoinRoomForm from './JoinRoomForm';
 // Logo
 import logo from '../icons/clarifylogowhite.png';
 
-const { Header, Content } = Layout;
-
 function Home() {
   return (
     <>
       <div id='home-page'>
         <div className='home-header'>
-          <img src={logo} width='25px' height='auto' style={{ marginRight: 6, marginBottom: 4 }} />
+          <img src={logo} alt='clarify logo' width='25px' height='auto' style={{ marginRight: 6, marginBottom: 4 }} />
         Clarify
         </div>
         <div id='home-body'>

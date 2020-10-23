@@ -10,13 +10,7 @@ function JoinRoomForm(props) {
   return (
     <Input placeholder='#'
       id='room-code-input'
-      style={{
-        borderRadius: '8px',
-        backgroundColor: '#ffffff',
-        margin: '12px',
-        maxWidth: '270px',
-        outline: 'none'
-      }} size={'large'} onPressEnter={(value) => validateRoomKey(value, props)} />
+      size={'large'} onPressEnter={(value) => validateRoomKey(value, props)} />
   );
 }
 

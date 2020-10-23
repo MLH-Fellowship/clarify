@@ -40,7 +40,7 @@ function Room(props) {
         <React.StrictMode>
             <div className='site-header'>
                 <Link to='/'>
-                    <img src={logo} width='25px' height='auto' style={{ marginRight: 6, marginBottom: 8 }} />
+                    <img src={logo} alt='clarify logo' width='25px' height='auto' style={{ marginRight: 6, marginBottom: 8 }} />
                     <span id='clarify-title'>Clarify</span>
                 </Link>
             </div>
