@@ -42,17 +42,20 @@ const QuestionForm = ({ user, roomId }) => {
 
   return (
     <>
-      <Form id='questionForm' form={form} name="horizontal_login" layout="inline" onFinish={onFinish}>
-        <div style={{ marginTop: '10px', marginLeft: '5px' }}>
+      <Form id='questionForm' form={form} name="horizontal_login" onFinish={onFinish}>
+        <div style={{ marginTop: '10px' }}>
           <Form.Item name='questionBox'>
             <Input placeholder="Ask a question..."
               style={{
                 borderRadius: '5px',
-                backgroundColor: '#f0f0f0'
-              }} size={'medium'} bordered={false} />
+                backgroundColor: 'white',
+                boxShadow: 'inset 0 3px 8px #00'
+              }}
+              size={'medium'}
+              bordered={false} />
           </Form.Item>
         </div>
-        <div style={{ marginTop: '10px' }}>
+        <div style={{ marginTop: '10px', marginLeft: '10px' }}>
           <Form.Item>
             <Button type='primary' shape='circle' icon={<ArrowUpOutlined />} size={'medium'} htmlType='submit' />
           </Form.Item>

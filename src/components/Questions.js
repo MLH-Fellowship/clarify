@@ -36,7 +36,7 @@ class Questions extends React.Component {
 
     return (
       <>
-        <div style={{ height: "450px", overflowY: "auto" }}>
+        <div className='question-container'>
           {allQuestions}
         </div>
         <QuestionForm roomId={this.props.roomId} />

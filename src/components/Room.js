@@ -1,5 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router';
+import { Link } from 'react-router-dom';
 import { Tooltip, message } from 'antd';
 
 // Components
@@ -13,7 +14,7 @@ import 'antd/dist/antd.css';
 import '../styles/format.css';
 
 // Logo
-// import logo from '../icons/diamond.png'
+import logo from '../icons/clarifylogoblue.png'
 
 function Room(props) {
     let { id } = useParams();
@@ -37,21 +38,27 @@ function Room(props) {
 
     return (
         <React.StrictMode>
-            {/* <img src={logo} width='45px' height='45px' /> TODO: Put on same row */}
-            <h1 style={{ padding: 25, fontFamily: 'sans-serif', fontSize: '30px' }}>clarify</h1>
-
+            <div className='site-header'>
+                <Link to='/'>
+                    <img src={logo} width='25px' height='auto' style={{ marginRight: 6, marginBottom: 8 }} />
+                    <span id='clarify-title'>Clarify</span>
+                </Link>
+            </div>
             <Tooltip placement="top" title={'Click to copy'}>
                 <button className='joinCodeBadge' onClick={onClick}>Join Code: {id}</button>
             </Tooltip>
-            <div id='flexbox'>
-                <div class='questions'>
-                    <h3> Question Board </h3>
-                    <div class='questionDiv'>
+            <div style={{ paddingLeft: 40, paddingTop: 45, fontSize: '18px' }}>My Room</div>
+
+            <div class="flex-container">
+                <div class='row'>
+                    <div class='column-q'>
+                        <p style={{ fontWeight: 'bold' }}>Question Board</p>
                         <Questions roomId={id} />
                     </div>
-                </div>
-                <div class='poll'>
-                    <Poll roomId={id} />
+                    <div class='column-p'>
+                        <p style={{ fontWeight: 'bold' }}>Class Sentiment</p>
+                        <Poll roomId={id} />
+                    </div>
                 </div>
             </div>
         </React.StrictMode>
