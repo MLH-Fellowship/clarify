@@ -110,8 +110,16 @@ body {
 .question-container{
   height:480px;
   overflow-y: auto;
-  position:relative; 
+  position:relative;
   /* border: 2px solid green; */
+}
+
+#question-container-empty {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height:100%;
 }
 
 .chart-container {
@@ -202,9 +210,18 @@ body {
   outline:'none';
 }
 
-#room-code-input:focus, #room-code-input:hover {
+#room-code-input:focus {
   border:1px solid var(--light-background-color);
   box-shadow: 0 0 5px #2557c9;
+}
+
+#question-form-input {
+  border-radius: '5px';
+  background-color: white;
+}
+
+#question-form-input:focus{
+  box-shadow: 0 0 5px #dee8fd;
 }
 
 #createButton {

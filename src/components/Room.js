@@ -47,7 +47,7 @@ function Room(props) {
             <Tooltip placement="top" title={'Click to copy'}>
                 <button className='joinCodeBadge' onClick={onClick}>Join Code: {id}</button>
             </Tooltip>
-            <div style={{ paddingLeft: 40, paddingTop: 45, fontSize: '18px' }}>My Room</div>
+            <div style={{ paddingLeft: 40, paddingTop: 40, fontSize: '18px' }}>My Room</div>
 
             <div class="flex-container">
                 <div class='row'>

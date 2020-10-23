@@ -45,12 +45,7 @@ const QuestionForm = ({ user, roomId }) => {
       <Form id='questionForm' form={form} name="horizontal_login" onFinish={onFinish}>
         <div style={{ marginTop: '10px' }}>
           <Form.Item name='questionBox'>
-            <Input placeholder="Ask a question..."
-              style={{
-                borderRadius: '5px',
-                backgroundColor: 'white',
-                boxShadow: 'inset 0 3px 8px #00'
-              }}
+            <Input id='question-form-input' placeholder='Ask a question...'
               size={'medium'}
               bordered={false} />
           </Form.Item>
