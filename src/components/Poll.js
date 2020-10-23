@@ -43,13 +43,13 @@ function Poll({ roomId }) {
     setActive(e.target.value);
   }
 
-  const buttons = pollOptions.map((option) => <SentimentButton text={option} color={option === active ? '#007bff' : '#f0f0f0'} />)
+  const buttons = pollOptions.map((option) => <SentimentButton className='sentiment-button' text={option} color={option === active ? '#5285fb' : 'white'} />)
 
   return (
     <>
-      <div>
-        <BarChart2 data={data} labels={pollOptions} color={'#007bff'} />
-        <Radio.Group onChange={onChange} defaultValue={defaultOption} size='medium' style={{ width: '100%' }}>
+      <div className='poll' >
+        <BarChart2 data={data} labels={pollOptions} color={'#5285fb'} />
+        <Radio.Group onChange={onChange} defaultValue={defaultOption} size='large' style={{ width: '100%' }}>
           {buttons}
         </Radio.Group>
       </div>
