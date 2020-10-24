@@ -52,10 +52,10 @@ function Room(props) {
     return (
         <React.StrictMode>
             <div className='site-header'>
-                <Link to='/'>
-                    <img src={logo} alt='clarify logo' width='25px' height='auto' style={{ marginRight: 6, marginBottom: 8 }} />
-                    <span id='clarify-title'>Clarify</span>
-                </Link>
+                {/* <Link to='/'> */}
+                <img src={logo} alt='clarify logo' width='25px' height='auto' style={{ marginRight: 6, marginBottom: 8 }} />
+                <span id='clarify-title'>Clarify</span>
+                {/* </Link> */}
             </div>
             <Tooltip placement='top' title={'Click to copy'}>
                 <button className='joinCodeBadge' onClick={onClick}>{room ? `Join Code: ${id}` : 'Join Code:'}</button>
