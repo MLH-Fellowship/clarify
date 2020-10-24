@@ -97,15 +97,7 @@ const enterPollVote = (roomId, option, action, prevOption) => {
     .doc(option);
 
   // update vote count
-  if (action) {
-    optionRef.update({ count: increment })
-  } else {
-    optionRef.get().then(function (doc) {
-      if (doc.data().count > 0) {
-        optionRef.update({ count: decrement });
-      }
-    });
-  }
+  action ? optionRef.update({ count: increment }) : optionRef.update({ count: decrement });
 
   // if prevOption is provided, decrement it
   if (prevOption) {
