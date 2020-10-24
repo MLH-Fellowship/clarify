@@ -90,6 +90,7 @@ const createRoom = async (generate, success) => {
 ////////////////// Core actions
 
 const enterPollVote = (roomId, option, action, prevOption) => {
+  console.log(roomId, option, action, prevOption);
   // action: {true, false} for increase and decrease
   const optionRef = db.collection('rooms')
     .doc(roomId)

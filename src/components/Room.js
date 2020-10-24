@@ -62,10 +62,8 @@ function Room(props) {
         <React.StrictMode>
             <div className='site-header'>
                 <a href='/'>
-                    <div ref={logoRef} >
-                        <img src={logo} alt='clarify logo' width='25px' height='auto' style={{ marginRight: 6, marginBottom: 8 }} />
-                        <span id='clarify-title'>Clarify</span>
-                    </div>
+                    <img src={logo} alt='clarify logo' width='25px' height='auto' style={{ marginRight: 6, marginBottom: 8 }} />
+                    <span id='clarify-title'>Clarify</span>
                 </a>
             </div>
             <Tooltip placement='top' title={'Click to copy'}>

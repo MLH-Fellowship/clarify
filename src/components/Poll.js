@@ -33,8 +33,24 @@ function Poll({ roomId, logoRef }) {
 
   useEffect(() => {
     // When user signs on, increment the default selection
+    console.log('useEffect');
+
     enterPollVote(roomId, defaultOption, true);
 
+    // var result = [];
+    // db.collection('rooms')
+    //   .doc(roomId)
+    //   .collection('poll')
+    //   .get().then(function (querySnapshot) {
+    //     querySnapshot.forEach(function (doc) {
+    //       result.push({ name: doc.id, count: doc.data().count });
+    //     });
+    //     setData(result);
+    //   });
+
+  }, []);
+
+  useEffect(() => {
     // Listen for changes in votes and push to all clients
     const unsubscribe = db.collection('rooms')
       .doc(roomId)
@@ -48,7 +64,7 @@ function Poll({ roomId, logoRef }) {
       });
 
     return unsubscribe;
-  }, [defaultOption, roomId]);
+  }, []);
 
   function onChange(e) {
     // let result = [];
