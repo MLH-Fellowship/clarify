@@ -29,7 +29,7 @@ function Poll({ roomId, logoRef }) {
         enterPollVote(roomId, active, false);
       }
     };
-  }, [history, active, roomId]);
+  }, [history]);
 
   useEffect(() => {
     // When user signs on, increment the default selection

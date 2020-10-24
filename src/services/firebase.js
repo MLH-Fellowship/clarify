@@ -3,7 +3,7 @@ import 'firebase/firestore';
 import { message } from 'antd';
 
 const firebaseApp = firebase.initializeApp({
-  apiKey: 'AIzaSyCXZ3IgNwq1vczQYOoL_c0cph91RXxnKTw',
+  apiKey: process.env.REACT_APP_API_KEY,
   authDomain: 'testing-500d7.firebaseapp.com',
   databaseURL: 'https://testing-500d7.firebaseio.com',
   projectId: 'testing-500d7',
