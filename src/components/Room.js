@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { Tooltip, message } from 'antd';
 import { getRoom } from '../services/firebase'
 
@@ -37,7 +37,7 @@ function Room(props) {
             room ? setRoom(room) : setwillRedirect(true);
         }
         getRoomName();
-    }, []);
+    }, [id]);
 
     function onClick() {
         var dummy = document.createElement('textarea');

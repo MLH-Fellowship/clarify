@@ -26,11 +26,10 @@ function Poll({ roomId, logoRef }) {
   useEffect(() => {
     return () => {
       if (history.action === 'POP') {
-        console.log('back button');
         enterPollVote(roomId, active, false);
       }
     };
-  }, [history]);
+  }, [history, active, roomId]);
 
   useEffect(() => {
     // When user signs on, increment the default selection

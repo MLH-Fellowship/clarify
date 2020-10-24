@@ -3,7 +3,7 @@ import { notification } from 'antd'
 import { SmileTwoTone } from '@ant-design/icons';
 import { withRouter } from 'react-router-dom'; // <--- import `withRouter`. We will use this in the bottom of our file.
 
-import { createRoom, getRoom } from '../services/firebase'
+import { createRoom } from '../services/firebase'
 
 import '../styles/home.css';
 
