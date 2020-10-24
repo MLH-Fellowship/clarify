@@ -19,12 +19,13 @@ import logo from '../icons/clarifylogoblue.png'
 
 function Room(props) {
     const [room, setRoom] = useState();
+    const [willRedirect, setwillRedirect] = useState(false);
     let { id } = useParams();
 
     useEffect(() => {
         async function getRoomName() {
             var room = await getRoom(id);
-            setRoom(room);
+            room ? setRoom(room) : setwillRedirect(true);
         }
         getRoomName();
     }, []);
@@ -44,6 +45,10 @@ function Room(props) {
         success();
     }
 
+    if (willRedirect) {
+        return <Redirect to='/' />
+    }
+
     return (
         <React.StrictMode>
             <div className='site-header'>
@@ -53,9 +58,9 @@ function Room(props) {
                 </Link>
             </div>
             <Tooltip placement='top' title={'Click to copy'}>
-                <button className='joinCodeBadge' onClick={onClick}>Join Code: {id}</button>
+                <button className='joinCodeBadge' onClick={onClick}>{room ? `Join Code: ${id}` : 'Join Code:'}</button>
             </Tooltip>
-            <div style={{ paddingLeft: 40, paddingTop: 40, fontSize: '18px' }}>{room ? room.roomName : <Redirect to='/' />}</div>
+            <div style={{ paddingLeft: 40, paddingTop: 40, fontSize: '18px' }}>{room ? room.roomName : 'My Room'}</div>
 
             <div className='flex-container'>
                 <div className='row'>
