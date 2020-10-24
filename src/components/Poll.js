@@ -7,7 +7,7 @@ import SentimentButton from './SentimentButton';
 import BarChart2 from './BarChart2';
 import { Radio } from 'antd';
 
-function Poll({ roomId }) {
+function Poll({ roomId, logoRef }) {
 
   // const collectionName = 'poll';
   const pollOptions = ['😳', '😕', '🙂', '😁'];
@@ -15,24 +15,22 @@ function Poll({ roomId }) {
   const [data, setData] = useState([]);
   const [active, setActive] = useState(defaultOption);
 
-
   let history = useHistory();
-
-  // when user navigates using React router, decrement the prev selection
-  // TODO: click on logo isn't detected yet
-  useEffect(() => {
-    return () => {
-      if (history.action === "POP") {
-        console.log('back button');
-        enterPollVote(roomId, active, false);
-      }
-    };
-  }, [history]);
 
   // when user refreshes/closes/navigates away, decrement the prev selection
   window.onbeforeunload = function () {
     enterPollVote(roomId, active, false);
   }
+
+  // when user navigates away from room using React router, decrement the prev selection
+  useEffect(() => {
+    return () => {
+      if (history.action === 'POP') {
+        console.log('back button');
+        enterPollVote(roomId, active, false);
+      }
+    };
+  }, [history]);
 
   useEffect(() => {
     // When user signs on, increment the default selection
@@ -87,4 +85,4 @@ function Poll({ roomId }) {
   )
 }
 
-export default Poll;
+export default withRouter(Poll);
