@@ -56,10 +56,11 @@ const getRoom = async id => {
 const createRoom = async (generate, success) => {
 
   // Generate unique ID
-  var roomId = 'VCkJj';
+  var roomId = generate();
 
   // Regenerate id if room exists already
-  if (await getRoom(roomId)) {
+  while (await getRoom(roomId)) {
+    console.log('Room key exists already. Regenerating...')
     roomId = generate();
   }
 
