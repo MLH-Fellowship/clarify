@@ -3,7 +3,7 @@ import { notification } from 'antd'
 import { SmileTwoTone } from '@ant-design/icons';
 import { withRouter } from 'react-router-dom'; // <--- import `withRouter`. We will use this in the bottom of our file.
 
-import { createRoom } from '../services/firebase'
+import { createRoom, auth } from '../services/firebase'
 
 import '../styles/home.css';
 
@@ -31,6 +31,13 @@ const CreateRoomForm = (props) => {
   async function onClick() {
     var roomId = await createRoom(generate, success);
     console.log(roomId);
+
+    auth.onAuthStateChanged(function (user) {
+      if (user) {
+        localStorage.setItem(roomId, user.uid);
+      }
+    });
+
     return props.history.push(`${roomId}`) // <--- The page you want to redirect your user to.
   }
 
