@@ -1,8 +1,9 @@
 import * as firebase from 'firebase';
 import 'firebase/firestore';
+import { message } from 'antd';
 
 const firebaseApp = firebase.initializeApp({
-  apiKey: 'AIzaSyCXZ3IgNwq1vczQYOoL_c0cph91RXxnKTw',
+  apiKey: process.env.REACT_APP_API_KEY,
   authDomain: 'testing-500d7.firebaseapp.com',
   databaseURL: 'https://testing-500d7.firebaseio.com',
   projectId: 'testing-500d7',
@@ -17,36 +18,101 @@ const auth = firebaseApp.auth();
 const increment = firebase.firestore.FieldValue.increment(1);
 const decrement = firebase.firestore.FieldValue.increment(-1);
 
-const createRoom = (roomId, success) => {
-  const pollOptions = ['😳', '😕', '🙂', '😁'];
 
-  db.collection('rooms')
-    .doc(roomId)
-    .set({ roomName: 'My Room Name' })
-    .then(function () {
-      if (success) {
-        success();
-      }
-    });
+////////////////// App actions
 
-  // Add a new poll collection initialized the options and count: 0
-  pollOptions.map((pollOption) =>
-    db.collection('rooms')
-      .doc(roomId)
-      .collection('poll')
-      .doc(pollOption)
-      .set({ count: 0 }));
+const validateRoomKey = (e, props) => {
+  // Room code entered
+  let value = e.target.value;
+
+  db.collection('rooms').get().then(function (querySnapshot) {
+    let rooms = querySnapshot.docs.map((doc) => { return doc.id });
+    if (!rooms.includes(value)) {
+      message.error('Room code is invalid');
+    }
+    else {
+      auth.signInAnonymously();
+      localStorage.removeItem(value);
+      message.success('Entered room');
+
+      return props.history.push(`${value}`);
+    }
+  })
 }
 
-// Core actions
+// Get room by id; returns undefined if id does not exist * Use async function with async/await *
+const getRoom = async id => {
+  const docRef = db.collection('rooms').doc(id);
 
-const enterPollVote = (roomId, option, action) => {
+  try {
+    const doc = await docRef.get();
+    return doc.data();
+  }
+  catch (err) {
+    console.log('Error getting document:', err);
+  }
+};
+
+// Add a new poll collection with options initialized and count: 0 * Use async function with async/await *
+const createRoom = async (generate, success) => {
+
+  // Generate unique ID
+  var roomId = generate();
+
+  // Regenerate id if room exists already
+  while (await getRoom(roomId)) {
+    console.log('Room key exists already. Regenerating...')
+    roomId = generate();
+  }
+
+  const pollOptions = ['😳', '😕', '🙂', '😁'];
+
+  return new Promise((resolve) => {
+
+
+    db.collection('rooms')
+      .doc(roomId)
+      .set({ roomName: 'My Room' })
+      .then(function () {
+        success(roomId);
+        resolve(roomId);
+      });
+
+    // Add a new poll collection initialized the options and count: 0
+    pollOptions.map((pollOption) =>
+      db.collection('rooms')
+        .doc(roomId)
+        .collection('poll')
+        .doc(pollOption)
+        .set({ count: 0 }));
+  })
+}
+
+////////////////// Core actions
+
+const enterPollVote = (roomId, option, action, prevOption) => {
+  console.log(roomId, option, action, prevOption);
   // action: {true, false} for increase and decrease
-  const docRef = db.collection('rooms')
+  const optionRef = db.collection('rooms')
     .doc(roomId)
     .collection('poll')
     .doc(option);
-  action ? docRef.update({ count: increment }) : docRef.update({ count: decrement });
+
+  // update vote count
+  action ? optionRef.update({ count: increment }) : optionRef.update({ count: decrement });
+
+  // if prevOption is provided, decrement it
+  if (prevOption) {
+    const prev = db.collection('rooms')
+      .doc(roomId)
+      .collection('poll')
+      .doc(prevOption);
+    prev.get().then(function (doc) {
+      if (doc.data().count > 0) {
+        prev.update({ count: decrement });
+      }
+    });
+  }
 }
 
 const likeQuestion = (roomId, questionId, action) => {
@@ -103,18 +169,19 @@ const addQuestion = (roomId, data, success) => {
 }
 
 // Delete question with success feedback
-const resolveQuestion = (roomId, questionId) => {
+const resolveQuestion = (roomId, questionId, success) => {
   db.collection('rooms').doc(roomId)
     .collection('questions')
     .doc(questionId)
     .delete()
     .then(() => {
-      console.log(questionId, 'successfully resolved');
+      success();
     })
     .catch(function (error) {
       console.error('Error removing question: ', error);
     });
 }
+
 
 export {
   db,
@@ -128,5 +195,7 @@ export {
   resolveQuestion,
   likeQuestion,
   enterPollVote,
-  createRoom
+  createRoom,
+  validateRoomKey,
+  getRoom
 };

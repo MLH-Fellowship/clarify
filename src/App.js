@@ -3,10 +3,12 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Room from './components/Room'
 import Home from './components/Home'
 
+export const ThemeContext = React.createContext();
+
 function App() {
 
   return (
-    <div className="App" style={{ backgroundColor: 'white', height: "100%" }}>
+    <div className='App'>
       <Router>
         <Switch>
           <Route path='/' exact component={() => <Home />} />

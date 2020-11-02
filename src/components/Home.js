@@ -1,34 +1,30 @@
-import React from "react";
-import "../styles/home.css";
-import Form from "./Form";
-import { Layout } from 'antd';
+import React from 'react';
 
-import CreateRoomForm from "./CreateRoomForm";
+import CreateRoomForm from './CreateRoomForm';
 import JoinRoomForm from './JoinRoomForm';
-const { Header, Content } = Layout;
+
+// Logo
+import logo from '../icons/clarifylogowhite.png';
 
 function Home() {
   return (
-    <Layout>
-      
-      <Header id='title' style={{
-        backgroundColor: '#48b2ff', height: '10vh', fontSize: '32px'
-        , color: 'white', paddingLeft: '40px', verticalAlign: 'center'
-      }}> clarify </Header>
-      <Content id='content' style={{ height: '90vh', backgroundColor: '#48b2ff' }}>
-        <div></div>
-        <div className="create">
-          <CreateRoomForm />
+    <>
+      <div id='home-page'>
+        <div className='home-header'>
+          <img src={logo} alt='clarify logo' width='25px' height='auto' style={{ marginRight: 6, marginBottom: 4 }} />
+        Clarify
         </div>
-
-        <div className="join">
-          <h5 style={{ color: "white" }}>OR enter an existing room code</h5>
-          <JoinRoomForm />
+        <div id='home-body'>
+          <div id='home-form'>
+            <CreateRoomForm />
+            <div id='join-room-form'>
+              <div style={{ color: 'white', fontSize: '20px' }}>or enter an existing room code</div>
+              <JoinRoomForm />
+            </div>
+          </div>
         </div>
-      </Content>
-
-
-    </Layout>
+      </div>
+    </>
   );
 
 }

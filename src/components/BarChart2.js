@@ -18,7 +18,8 @@ class BarChart2 extends React.Component {
 
   buildChart = () => {
 
-    const myChartRef = this.chartRef.current.getContext('2d');
+    const ctx = this.chartRef.current.getContext('2d');
+    // ctx.canvas.height = 250;
 
     if (myChart) {
       myChart.destroy();
@@ -38,16 +39,12 @@ class BarChart2 extends React.Component {
     data = data.map(o => Object.values(o)[0]);
 
     var color = data.map(x => this.props.color);
-    // color[color.indexOf(Math.max(...color))] = '#1890ff';
-    // console.log(color);
 
     Chart.defaults.global.defaultFontSize = 14;
     // Chart.defaults.global.defaultFontFamily = 'Source Sans Pro';
-    myChart = new Chart(myChartRef, {
+    myChart = new Chart(ctx, {
       plugins: [ChartDataLabels],
       type: 'bar',
-      response: true,
-      maintainAspectRatio: false,
       data: {
         labels: labels,
         datasets: [
@@ -55,18 +52,40 @@ class BarChart2 extends React.Component {
             label: '# votes',
             data: data,
             backgroundColor: color,
-            borderWidth: 0
+            borderWidth: 0,
+            barPercentage: 0.8
           }
         ]
       },
       options: {
+        animation: {
+          duration: 0
+        },
+        responsive: true,
+        maintainAspectRatio: false,
+        tooltips: {
+          enabled: false
+        },
+        layout: {
+          padding: {
+            top: 25,
+            right: 10
+          }
+        },
         plugins: {
           // Change options for ALL labels of THIS CHART
           datalabels: {
             anchor: 'end',
             align: 'end',
             offset: '6',
-            color: '#48b2ff'
+            color: this.props.color,
+            labels: {
+              title: {
+                font: {
+                  weight: 'bold'
+                }
+              }
+            }
           }
         },
         legend: {
@@ -92,20 +111,22 @@ class BarChart2 extends React.Component {
             ticks: {
               display: false, // axis labels
               beginAtZero: true,
-              suggestedMax: 50
+              suggestedMax: 15
             }
           }]
-        }
-        ,
-        animation: {
-          duration: 0
         }
       }
     });
   }
 
   render() {
-    return <canvas id='myChart' ref={this.chartRef} />
+    return (
+      <>
+        <div className='chart-container'>
+          <canvas id='myChart' ref={this.chartRef} />
+        </div>
+      </>
+    )
   };
 }
 

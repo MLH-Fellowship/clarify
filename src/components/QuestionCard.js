@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Comment, Tooltip, Avatar } from 'antd';
+import { message, Comment, Tooltip, Avatar } from 'antd';
 import moment from 'moment';
 import { LikeOutlined, LikeFilled } from '@ant-design/icons';
 import { db, likeQuestion, resolveQuestion } from '../services/firebase';
@@ -49,7 +49,7 @@ const QuestionCard = ({ questionId, roomId }) => {
       const dateObj = new Date(toDateTime(doc.data().created.seconds));
       setDate(timeAgo(dateObj));
     }).catch(function (error) {
-      console.log("Error getting document:", error);
+      console.log('Error getting document:', error);
     });
 
     // Listen for changes in votes and push to all clients
@@ -64,7 +64,9 @@ const QuestionCard = ({ questionId, roomId }) => {
   }, [questionId, roomId]);
 
   function resolve() {
-    resolveQuestion(roomId, questionId);
+    resolveQuestion(roomId, questionId, () => {
+      message.info('Question resolved');
+    });
   };
 
   const like = () => {
@@ -77,15 +79,15 @@ const QuestionCard = ({ questionId, roomId }) => {
   };
 
   const actions = [
-    <Tooltip key="comment-basic-like" title={!liked ? 'Like' : 'Unlike'}>
+    <Tooltip key='comment-basic-like' title={!liked ? 'Like' : 'Unlike'}>
       <span onClick={like}>
         {!liked ? <LikeOutlined /> : <LikeFilled />}
-        <span className="comment-action">{likes}</span>
+        <span className='comment-action'>{likes}</span>
       </span>
     </Tooltip>,
 
-    <Tooltip key="comment-basic-resolve" title="Remove question">
-      <span onClick={resolve} key="comment-basic-resolve-">Resolve</span>
+    <Tooltip key='comment-basic-resolve' title='Remove question'>
+      <span onClick={resolve} key='comment-basic-resolve-'>Resolve</span>
     </Tooltip>
   ];
 
@@ -97,7 +99,7 @@ const QuestionCard = ({ questionId, roomId }) => {
         avatar={
           <Avatar
             src={avatar}
-            alt="Avatar icon"
+            alt='Avatar icon'
           />
         }
         content={
