@@ -2,7 +2,7 @@
 
 Clarify is a tool for educators to make instruction more interactive for students. Instructor can create rooms where students can ask questions in realtime and provide feedback to the instructor regarding their understanding of the class. Try it now: https://clarify-io.web.app/
 
-![](RoomScreenshot.png)
+![](RoomScreenshot2.png)
 
 ## Features
 
